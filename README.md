@@ -1,6 +1,8 @@
 # DD_J_mod_gmaps_module
  A Joomla! module to display Google Maps. Addon Module for DD Gmaps Locations https://github.com/hr-it-solutions/DD_J_com_gmaps_locations. Module can also be used as stand alone module
 
+[![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.png?v=102)](https://opensource.org/licenses/GPL-2.0/)
+
 - Map in Popup (full size PopUp)
 - Customizable markers, cluster markers and info box (PopUp by click on map)
 - Adjustable map size, position and zoom level
