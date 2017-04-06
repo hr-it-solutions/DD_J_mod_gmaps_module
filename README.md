@@ -8,7 +8,6 @@
 - Map in Popup (full size PopUp)
 - Validate a single addresses via the backend (geocoding of the address)
 - Google Maps v3 integration (API key connection possible) Integrated Google JavaScript API and Geocoding API
-- Customizable marker and info box (PopUp by click on map)
 - Adjustable map size, position and zoom level
 - Support all major web browsers
 
@@ -16,7 +15,6 @@
 - Locations Linked to the map
 - Profile pages liked to the map
 - Extends list layout to display multiple locations
-- Customizable cluster markers
 
 **and much more...**
 
