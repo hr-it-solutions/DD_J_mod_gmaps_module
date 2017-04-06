@@ -31,6 +31,17 @@
                 />
 
                 <field
+                        name="fullsize"
+                        type="list"
+                        label="MOD_DD_GMAPS_MODULE_FULLSIZE_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_FULLSIZE_DESC"
+                        default="1"
+                >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field
                         name="force_map_size"
                         type="list"
                         label="MOD_DD_GMAPS_MODULE_FORCE_MAP_SIZE_LABEL"
