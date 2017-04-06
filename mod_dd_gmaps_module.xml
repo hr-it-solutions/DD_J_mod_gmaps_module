@@ -46,7 +46,7 @@
                         type="number"
                         default="0"
                         label="MOD_DD_GMAPS_MODULE_WIDTH_LABEL"
-                        description="MOD_DD_GMAPS_MODULE_ZOOMLEVEL_DESC"
+                        description="MOD_DD_GMAPS_MODULE_WIDTH_DESC"
                 />
 
                 <field
@@ -107,6 +107,19 @@
                        label="MOD_DD_GMAPS_MODULE_ZIP_LABEL"
                        description="MOD_DD_GMAPS_MODULE_ZIP_DESC"
                 />
+
+                <fieldset addfieldpath="/modules/mod_dd_gmaps_module/fields">
+                    <field name="country" type="country" label="MOD_DD_GMAPS_MODULE_COUNTRY_LABEL"
+                           description="MOD_DD_GMAPS_MODULE_COUNTRY_DESC"
+                           required="true" />
+                </fieldset>
+
+                <field name="federalstate"
+                       type="text"
+                       class="inputbox"
+                       size="40"
+                       label="MOD_DD_GMAPS_MODULE_FEDERALSTATE_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_FEDERALSTATE_DESC"/>
 
                 <field name="latitude"
                        type="text"
