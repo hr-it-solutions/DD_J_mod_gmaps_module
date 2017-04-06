@@ -65,6 +65,22 @@
                       description="MOD_DD_GMAPS_MODULE_DEFAULT_ADDRESS_DESC"
             >
 
+                <field name="location_name"
+                       type="text"
+                       class="inputbox"
+                       size="40"
+                       label="MOD_DD_GMAPS_MODULE_LOCATION_NAME_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_LOCATION_NAME_DESC"
+                />
+
+                <field name="location_image"
+                       type="media"
+                       directory="dd_gmaps_module"
+                       size="40"
+                       label="MOD_DD_GMAPS_MODULE_LOCATION_IMAGE_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_LOCATION_IMAGE_DESC"
+                />
+
                 <field
                         name="set_as_default_position"
                         type="list"
@@ -75,14 +91,6 @@
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
-
-                <field name="location_name"
-                       type="text"
-                       class="inputbox"
-                       size="40"
-                       label="MOD_DD_GMAPS_MODULE_LOCATION_NAME_LABEL"
-                       description="MOD_DD_GMAPS_MODULE_LOCATION_NAME_DESC"
-                />
 
                 <field name="street"
                        type="text"
@@ -138,6 +146,7 @@
                        class="readonly"
                        description="MOD_DD_GMAPS_MODULE_LONGITUDE_DESC"
                 />
+
             </fieldset>
             <!-- Google API Settings -->
             <fieldset name="google_api_settings"
@@ -167,7 +176,7 @@
 
                 <field name="marker_image"
                        type="media"
-                       directory="dd_gmaps_locations"
+                       directory="dd_gmaps_module"
                        size="40"
                        label="MOD_DD_GMAPS_MARKER_IMAGE_LABEL"
                        description="MOD_DD_GMAPS_MARKER_IMAGE_DESC"
@@ -175,7 +184,7 @@
 
                 <field name="clustermarker_image"
                        type="media"
-                       directory="dd_gmaps_locations"
+                       directory="dd_gmaps_module"
                        size="40"
                        label="MOD_DD_GMAPS_CLUSTERMARKER_IMAGE_LABEL"
                        description="MOD_DD_GMAPS_CLUSTERMARKER_IMAGE_DESC"
@@ -226,11 +235,17 @@
             </fieldset>
         </fields>
     </config>
+
     <languages folder="language">
         <language tag="en-GB">en-GB/en-GB.mod_dd_gmaps_module.ini</language>
         <language tag="en-GB">en-GB/en-GB.mod_dd_gmaps_module.sys.ini</language>
         <language tag="de-DE">de-DE/de-DE.mod_dd_gmaps_module.ini</language>
         <language tag="de-DE">de-DE/de-DE.mod_dd_gmaps_module.sys.ini</language>
     </languages>
+
+    <media destination="mod_dd_gmaps_module" folder="media">
+        <folder>css</folder>
+        <folder>js</folder>
+    </media>
 
 </extension>
