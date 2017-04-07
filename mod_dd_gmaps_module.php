@@ -10,7 +10,12 @@ defined('_JEXEC') or die;
 
 require_once __DIR__ . '/helper.php';
 
+$doc = JFactory::getDocument();
+
 // Include the functions only once
 JLoader::register('ModDD_GMaps_Module_Helper', __DIR__ . '/helper.php');
+
+$doc->addScript('https://maps.google.com/maps/api/js?&libraries=places&v=3&key=' . $params->get('google_api_key_js_places',''));
+$doc->addScript(JUri::base() . 'media/mod_dd_gmaps_module/js/markerclusterer_compiled.js');
 
 require JModuleHelper::getLayoutPath('mod_dd_gmaps_module', $params->get('layout', 'default'));
