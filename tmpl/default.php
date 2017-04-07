@@ -70,11 +70,11 @@ $varProducerIndex = 0;
         // Create map
         var googleMapOptions =
             {
-                center: home,           // Map center
-                zoom: 4,               // Zoom level
-                panControl: true,       // Activate pan control
-                zoomControl: true,      // Activate zoom control
-                scaleControl: true,     // Activate scale control
+                center: home,
+                zoom: 4,
+                panControl: true,
+                zoomControl: true,
+                scaleControl: true,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
         map = new google.maps.Map(document.getElementById("dd_gmaps"), googleMapOptions);
