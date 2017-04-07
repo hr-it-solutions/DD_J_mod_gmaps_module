@@ -16,7 +16,9 @@ class JFormFieldCountry extends JFormFieldList {
 
 	protected $type = 'Country';
 
-	protected $countries_json = '/modules/mod_dd_gmaps_module/countries.json';
+	protected $countries_json = 'countries.json';
+
+	protected $countries_json_path;
 
 	/**
 	 * Get Options
@@ -28,11 +30,15 @@ class JFormFieldCountry extends JFormFieldList {
 	public function getOptions()
 	{
 		$countries = array();
+
 		$options = array();
 
-		if (JFile::exists($this->countries_json))
+		$this->countries_json_path = dirname(__FILE__, 2) .
+			'/countries/' . $this->countries_json;
+
+		if (JFile::exists($this->countries_json_path))
 		{
-			$json = file_get_contents(JPATH_COMPONENT . $this->countries_json);
+			$json = file_get_contents($this->countries_json_path);
 			$obj = json_decode($json);
 			$countries = $obj->extension->countries->country;
 		}
