@@ -109,6 +109,7 @@
                        size="40"
                        label="MOD_DD_GMAPS_MODULE_STREET_LABEL"
                        description="MOD_DD_GMAPS_MODULE_STREET_DESC"
+                       required="true"
                 />
 
                 <field name="location"
@@ -117,6 +118,7 @@
                        size="40"
                        label="MOD_DD_GMAPS_MODULE_LOCATION_LABEL"
                        description="MOD_DD_GMAPS_MODULE_LOCATION_DESC"
+                       required="true"
                 />
 
                 <field name="zip"
@@ -125,6 +127,7 @@
                        size="40"
                        label="MOD_DD_GMAPS_MODULE_ZIP_LABEL"
                        description="MOD_DD_GMAPS_MODULE_ZIP_DESC"
+                       required="true"
                 />
 
                 <fieldset addfieldpath="/modules/mod_dd_gmaps_module/fields">
