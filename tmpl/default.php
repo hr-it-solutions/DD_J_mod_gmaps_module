@@ -139,6 +139,31 @@ $varProducerIndex = 0;
         infowindow.setContent(GMapsLocations[i].content);
         infowindow.open(map, marker);
     }
+
+    function launchLocateInfoWindow(lat,lng,content,zoom) {
+        setTimeout(function(){
+            // Scroll to top
+            window.scroll(0, 0);
+
+            // Config and add marker
+            var pushLocation = new google.maps.LatLng(lat, lng);
+            var marker = new google.maps.Marker({ // add marker
+                position:pushLocation,
+                map: map,
+                draggable:true,
+                animation: google.maps.Animation.DROP, // Animation adding feature
+                title: "Ihr Standort",
+                icon: "images/fs_map/marker.png"
+            });
+
+            map.setZoom(zoom);
+            map.setCenter(marker.getPosition());
+
+            // Config and open infoWindows
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+        }, 800);
+    }
 </script>
 <div id="dd_gmaps">
     <p class="dd_gmaps_loader">Kartendaten werden geladen...</p>
