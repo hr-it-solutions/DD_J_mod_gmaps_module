@@ -37,13 +37,21 @@ $varProducerIndex = 0;
 </style>
 <script type="text/javascript">
 
+    jQuery( document ).ready(function() {
+
+        init_default_itemsJS();
+
+    });
+
     var home = new google.maps.LatLng(48.0000000, 2.0000000);
     var map;
     var markers = [];
 
     var GMapsLocations = [
     <?php
+
     $i = 0;
+
     foreach ( $items as $item ):
 
         $title = htmlspecialchars($item->title, ENT_QUOTES, 'UTF-8');
@@ -54,7 +62,7 @@ $varProducerIndex = 0;
 	        $title = '<a href="' . $title_link .'">' . $title .'</a>';
         }
 		?>
-        {   lat:<?php echo $item->latitude; ?>, 
+        {   lat:<?php echo $item->latitude; ?>,
             lng:<?php echo $item->longitude; ?>,
             icon: "<?php echo JUri::base() ?>media/mod_dd_gmaps_module/img/marker.png",
             content:'<?php echo '<span class="info-content">' . $title . '<br>' . htmlspecialchars($item->street,ENT_QUOTES,'UTF-8') . '<br>' . htmlspecialchars($item->location,ENT_QUOTES,'UTF-8') . '</span>'; ?>'
