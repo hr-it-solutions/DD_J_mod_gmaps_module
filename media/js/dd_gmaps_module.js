@@ -17,9 +17,3 @@ var init_default_itemsJS = function () {
     });
 
 };
-
-jQuery( document ).ready(function() {
-
-    init_default_itemsJS();
-
-});
