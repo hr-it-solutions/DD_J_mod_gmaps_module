@@ -8,6 +8,9 @@
 
 defined('_JEXEC') or die;
 
+$app = JFactory::getApplication();
+$input = $app->input;
+
 $instance = new ModDD_GMaps_Module_Helper;
 
 $isDDGMapsLocationsExtended = $instance->isDDGMapsLocationsExtended();
@@ -15,7 +18,7 @@ $isDDGMapsLocationsExtended = $instance->isDDGMapsLocationsExtended();
 $items = $instance->getItems();
 
 $sef_rewrite  = JFactory::getConfig()->get('sef_rewrite');
-$active_alias = JFactory::getApplication()->getMenu()->getActive()->alias;
+$active_alias = $app->getMenu()->getActive()->alias;
 
 $varProducerIndex = 0;
 ?>
@@ -160,8 +163,8 @@ $varProducerIndex = 0;
                 map: map,
                 draggable:true,
                 animation: google.maps.Animation.DROP, // Animation adding feature
-                title: "Ihr Standort",
-                icon: "images/fs_map/marker.png"
+                title: "<?php echo JText::_('MOD_DD_GMAPS_MODULE_YOUR_LOCATION'); ?>",
+                icon: "<?php echo JUri::base() ?>media/mod_dd_gmaps_module/img/marker_position.png"
             });
 
             map.setZoom(zoom);
@@ -172,8 +175,23 @@ $varProducerIndex = 0;
             infowindow.open(map, marker);
         }, 800);
     }
+    <?php 
+    // Geolocate info window launcher
+    if ($input->get("geolocate","STRING") == "locate")
+    {
+        $locationLatLng = explode(",", $input->get("locationLatLng","","STRING"));
+        $lat = substr($locationLatLng[0],0,10);
+        $lng = substr($locationLatLng[1],0,10);
+        $content = "'<span class=\"info-content\"><h2>" .
+            JText::_('MOD_DD_GMAPS_MODULE_YOUR_LOCATION') . "</h2><b>" .
+            JText::_('MOD_DD_GMAPS_MODULE_YOUR_LATITUDE') . ":</b> $lat<br><b>" .
+            JText::_('MOD_DD_GMAPS_MODULE_YOUR_LONGITUDE') . ":</b> $lng</span>'";
+        $zoom = 9;
+        echo "launchLocateInfoWindow($lat, $lng, $content, $zoom);";
+    }
+    ?>
 </script>
 <div id="dd_gmaps">
-    <p class="dd_gmaps_loader">Kartendaten werden geladen...</p>
+    <p class="dd_gmaps_loader"><?php echo JText::_('MOD_DD_GMAPS_MODULE_MAPS_PRELOADER'); ?></p>
 </div>
 <div class="clear"></div>
