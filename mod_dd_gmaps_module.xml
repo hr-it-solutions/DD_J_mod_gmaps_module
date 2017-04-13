@@ -184,57 +184,57 @@
 
             <!-- Marker Images -->
             <fieldset name="marker"
-                      label="MOD_DD_GMAPS_MARKER_SETTINGS_LABEL"
-                      description="MOD_DD_GMAPS_MARKER_SETTINGS_DESC"
+                      label="MOD_DD_GMAPS_MODULE_MARKER_SETTINGS_LABEL"
+                      description="MOD_DD_GMAPS_MODULE_MARKER_SETTINGS_DESC"
             >
 
                 <field name="marker_image"
                        type="media"
                        directory="dd_gmaps_module"
                        size="40"
-                       label="MOD_DD_GMAPS_MARKER_IMAGE_LABEL"
-                       description="MOD_DD_GMAPS_MARKER_IMAGE_DESC"
+                       label="MOD_DD_GMAPS_MODULE_MARKER_IMAGE_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_MARKER_IMAGE_DESC"
                 />
 
                 <field name="clustermarker_image"
                        type="media"
                        directory="dd_gmaps_module"
                        size="40"
-                       label="MOD_DD_GMAPS_CLUSTERMARKER_IMAGE_LABEL"
-                       description="MOD_DD_GMAPS_CLUSTERMARKER_IMAGE_DESC"
+                       label="MOD_DD_GMAPS_MODULE_CLUSTERMARKER_IMAGE_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_CLUSTERMARKER_IMAGE_DESC"
                 />
 
             </fieldset>
 
             <!-- Design Settings -->
             <fieldset name="design"
-                      label="MOD_DD_GMAPS_DESIGN_SETTINGS_LABEL"
-                      description="MOD_DD_GMAPS_DESIGN_SETTINGS_DESC"
+                      label="MOD_DD_GMAPS_MODULE_DESIGN_SETTINGS_LABEL"
+                      description="MOD_DD_GMAPS_MODULE_DESIGN_SETTINGS_DESC"
             >
 
                 <field name="popupbar_color"
                        type="color"
                        default="#eee"
-                       label="MOD_DD_GMAPS_POPUPBAR_COLOR_LABEL"
-                       description="MOD_DD_GMAPS_POPUPBAR_COLOR_DESC"
+                       label="MOD_DD_GMAPS_MODULE_POPUPBAR_COLOR_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_POPUPBAR_COLOR_DESC"
                 />
 
                 <field name="titletext_color"
                        type="color"
                        default="#333"
-                       label="MOD_DD_GMAPS_TITLETEXT_COLOR_LABEL"
-                       description="MOD_DD_GMAPS_TITLETEXT_COLOR_DESC"
+                       label="MOD_DD_GMAPS_MODULE_TITLETEXT_COLOR_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_TITLETEXT_COLOR_DESC"
                 />
 
                 <field
                         name="closing_image_color"
                         type="list"
-                        label="MOD_DD_GMAPS_CLOSING_IMAGE_COLOR_LABEL"
-                        description="MOD_DD_GMAPS_CLOSING_IMAGE_COLOR_DESC"
+                        label="MOD_DD_GMAPS_MODULE_CLOSING_IMAGE_COLOR_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_CLOSING_IMAGE_COLOR_DESC"
                         default="1"
                 >
-                    <option value="1">MOD_DD_GMAPS_CLOSING_IMAGE_BRIGHT_MODE</option>
-                    <option value="2">MOD_DD_GMAPS_CLOSING_IMAGE_DARK_MODE</option>
+                    <option value="1">MOD_DD_GMAPS_MODULE_CLOSING_IMAGE_BRIGHT_MODE</option>
+                    <option value="2">MOD_DD_GMAPS_MODULE_CLOSING_IMAGE_DARK_MODE</option>
                 </field>
 
             </fieldset>
