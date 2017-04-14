@@ -25,7 +25,7 @@
                         first="1"
                         last="10"
                         step="1"
-                        default="6"
+                        default="4"
                         label="MOD_DD_GMAPS_MODULE_ZOOMLEVEL_LABEL"
                         description="MOD_DD_GMAPS_MODULE_ZOOMLEVEL_DESC"
                 />
@@ -84,14 +84,6 @@
                        description="MOD_DD_GMAPS_MODULE_LOCATION_NAME_DESC"
                 />
 
-                <field name="location_image"
-                       type="media"
-                       directory="dd_gmaps_module"
-                       size="40"
-                       label="MOD_DD_GMAPS_MODULE_LOCATION_IMAGE_LABEL"
-                       description="MOD_DD_GMAPS_MODULE_LOCATION_IMAGE_DESC"
-                />
-
                 <field
                         name="set_as_default_position"
                         type="list"
@@ -145,7 +137,7 @@
 
                 <field name="latitude"
                        type="text"
-                       default="000.000000"
+                       default="48.0000000"
                        label="MOD_DD_GMAPS_MODULE_LATITUDE_LABEL"
                        readonly="true"
                        class="readonly"
@@ -154,7 +146,7 @@
 
                 <field name="longitude"
                        type="text"
-                       default="000.000000"
+                       default="2.0000000"
                        label="MOD_DD_GMAPS_MODULE_LONGITUDE_LABEL"
                        readonly="true"
                        class="readonly"
@@ -203,39 +195,6 @@
                        label="MOD_DD_GMAPS_MODULE_CLUSTERMARKER_IMAGE_LABEL"
                        description="MOD_DD_GMAPS_MODULE_CLUSTERMARKER_IMAGE_DESC"
                 />
-
-            </fieldset>
-
-            <!-- Design Settings -->
-            <fieldset name="design"
-                      label="MOD_DD_GMAPS_MODULE_DESIGN_SETTINGS_LABEL"
-                      description="MOD_DD_GMAPS_MODULE_DESIGN_SETTINGS_DESC"
-            >
-
-                <field name="popupbar_color"
-                       type="color"
-                       default="#eee"
-                       label="MOD_DD_GMAPS_MODULE_POPUPBAR_COLOR_LABEL"
-                       description="MOD_DD_GMAPS_MODULE_POPUPBAR_COLOR_DESC"
-                />
-
-                <field name="titletext_color"
-                       type="color"
-                       default="#333"
-                       label="MOD_DD_GMAPS_MODULE_TITLETEXT_COLOR_LABEL"
-                       description="MOD_DD_GMAPS_MODULE_TITLETEXT_COLOR_DESC"
-                />
-
-                <field
-                        name="closing_image_color"
-                        type="list"
-                        label="MOD_DD_GMAPS_MODULE_CLOSING_IMAGE_COLOR_LABEL"
-                        description="MOD_DD_GMAPS_MODULE_CLOSING_IMAGE_COLOR_DESC"
-                        default="1"
-                >
-                    <option value="1">MOD_DD_GMAPS_MODULE_CLOSING_IMAGE_BRIGHT_MODE</option>
-                    <option value="2">MOD_DD_GMAPS_MODULE_CLOSING_IMAGE_DARK_MODE</option>
-                </field>
 
             </fieldset>
 
