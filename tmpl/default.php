@@ -53,9 +53,7 @@ $varProducerIndex = 0;
     var GMapsLocations = [
     <?php
 
-    $i = 0;
-
-    foreach ( $items as $item ):
+    foreach ( $items as $i => $item ):
 
         $title = htmlspecialchars($item->title, ENT_QUOTES, 'UTF-8');
 
@@ -65,7 +63,9 @@ $varProducerIndex = 0;
 	        $title = '<a href="' . $title_link .'">' . $title .'</a>';
         }
 		?>
-        {   lat:<?php echo $item->latitude; ?>,
+        {   id:<?php echo isset($item->id) ? $item->id : 0; ?>,
+            key:<?php echo $i; ?>,
+            lat:<?php echo $item->latitude; ?>,
             lng:<?php echo $item->longitude; ?>,
             icon: "<?php echo JUri::base() ?>media/mod_dd_gmaps_module/img/marker.png",
             content:'<?php echo '<span class="info-content">' . $title . '<br>' . htmlspecialchars($item->street,ENT_QUOTES,'UTF-8') . '<br>' . htmlspecialchars($item->location,ENT_QUOTES,'UTF-8') . '</span>'; ?>'
@@ -182,12 +182,22 @@ $varProducerIndex = 0;
         $locationLatLng = explode(",", $input->get("locationLatLng","","STRING"));
         $lat = substr($locationLatLng[0],0,10);
         $lng = substr($locationLatLng[1],0,10);
-        $content = "'<span class=\"info-content\"><h2>" .
+        $content = "<h2>" .
             JText::_('MOD_DD_GMAPS_MODULE_YOUR_LOCATION') . "</h2><b>" .
             JText::_('MOD_DD_GMAPS_MODULE_YOUR_LATITUDE') . ":</b> $lat<br><b>" .
-            JText::_('MOD_DD_GMAPS_MODULE_YOUR_LONGITUDE') . ":</b> $lng</span>'";
+            JText::_('MOD_DD_GMAPS_MODULE_YOUR_LONGITUDE') . ":</b> $lng";
         $zoom = 9;
-        echo "launchLocateInfoWindow($lat, $lng, $content, $zoom);";
+
+        echo "launchLocateInfoWindow($lat,$lng,'$content',$zoom);";
+    }
+
+    // Show profile info window
+    if ($input->get('profile_id') != 0 || $i == 0)
+    {
+        echo 'setTimeout(function(){';
+	    echo 'var profileObj = jQuery.grep(GMapsLocations, function(e){ return e.id == ' . $input->get('profile_id', $i) .'; });';
+	    echo 'launchInfoWindow(profileObj[0].key)';
+	    echo '}, 600);';
     }
     ?>
 </script>
