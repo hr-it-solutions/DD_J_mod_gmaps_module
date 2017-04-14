@@ -23,8 +23,8 @@ if(!ModDD_GMaps_Module_Helper::isset_Script($doc->_scripts, $google_PlacesAPI))
 	$doc->addScript('https://maps.google.com/maps/api/' . $google_PlacesAPI . '&key=' . $google_PlacesAPI_Key);
 }
 
-$doc->addScript(JUri::base() . 'media/mod_dd_gmaps_module/js/markerclusterer_compiled.js');
-
-$doc->addScript(JUri::base() . 'media/mod_dd_gmaps_module/js/dd_gmaps_module.js');
+$doc->addScript(JUri::base() . 'media/mod_dd_gmaps_module/js/markerclusterer_compiled.min.js');
+$doc->addScript(JUri::base() . 'media/mod_dd_gmaps_module/js/dd_gmaps_module.min.js');
+$doc->addStyleSheet(JUri::base() . 'media/mod_dd_gmaps_module/css/dd_gmaps_module.min.css');
 
 require JModuleHelper::getLayoutPath('mod_dd_gmaps_module', $params->get('layout', 'default'));
