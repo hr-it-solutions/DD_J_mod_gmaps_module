@@ -24,8 +24,9 @@ $varProducerIndex = 0;
 ?>
 <script type="text/javascript">
     jQuery( document ).ready(function() { init_default_itemsJS(); });
-    var home = new google.maps.LatLng(48.0000000, 2.0000000),
-        clusterIcon = '<?php echo JUri::base() . 'media/mod_dd_gmaps_module/img/marker_cluster.png' ?>',
+    var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?>),
+        settingsClusterIcon = '<?php echo $instance->paramClusterMarkerImage($params); ?>',
+        settingsZoomLevel = <?php  echo (int) $params->get('zoomlevel') ?>,
         GMapsLocations = [
     <?php
     foreach ( $items as $i => $item ):
@@ -40,7 +41,7 @@ $varProducerIndex = 0;
             key:<?php echo $i; ?>,
             lat:<?php echo $item->latitude; ?>,
             lng:<?php echo $item->longitude; ?>,
-            icon: "<?php echo JUri::base() ?>media/mod_dd_gmaps_module/img/marker.png",
+            icon: '<?php echo $instance->paramMarkerImage($params); ?>',
             content:'<?php echo '<span class="info-content">' . $title . '<br>' . htmlspecialchars($item->street,ENT_QUOTES,'UTF-8') . '<br>' . htmlspecialchars($item->location,ENT_QUOTES,'UTF-8') . '</span>'; ?>'
         },<?php
     endforeach; ?>
