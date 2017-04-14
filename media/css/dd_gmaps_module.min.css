@@ -1,0 +1,7 @@
+/**
+ * @version     1-1-0-1 // Y-m-d 2017-04-06
+ * @author      HR IT-Solutions Florian Häusler https://www.hr-it-solutions.com
+ * @copyright   Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only  
+**/
+#dd_gmaps{background-color:#e5e3df;height:auto;overflow:hidden;width:100%;min-height:320px}#dd_gmaps_overloader{background-color:#e5e3df;height:450px;position:relative;margin-bottom:-450px;z-index:9}
