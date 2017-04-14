@@ -1,0 +1,226 @@
+<extension type="module" version="3.6" method="upgrade">
+    <name>mod_dd_gmaps_module</name>
+    <creationDate>06.04.2017</creationDate>
+    <author>HR IT-Solutions Florian Häusler</author>
+    <authorEmail>info@hr-it-solutions.com</authorEmail>
+    <authorUrl>https://www.hr-it-solutions.com</authorUrl>
+    <copyright>Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions</copyright>
+    <license>GNU/GPLv2 only</license>
+    <version>1.1.0.0</version>
+    <description>MOD_DD_GMAPS_MODULE_XML_DESCRIPTION</description>
+
+    <files>
+        <filename module="mod_dd_gmaps_module">mod_dd_gmaps_module.php</filename>
+        <filename>helper.php</filename>
+        <filename>LICENSE</filename>
+        <folder>tmpl</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+
+                <field
+                        name="zoomlevel"
+                        type="integer"
+                        first="1"
+                        last="10"
+                        step="1"
+                        default="4"
+                        label="MOD_DD_GMAPS_MODULE_ZOOMLEVEL_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_ZOOMLEVEL_DESC"
+                />
+
+                <field
+                        name="fullsize"
+                        type="list"
+                        label="MOD_DD_GMAPS_MODULE_FULLSIZE_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_FULLSIZE_DESC"
+                        default="1"
+                >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field
+                        name="force_map_size"
+                        type="list"
+                        label="MOD_DD_GMAPS_MODULE_FORCE_MAP_SIZE_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_FORCE_MAP_SIZE_DESC"
+                        default="0"
+                >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field
+                        name="width"
+                        type="number"
+                        default="0"
+                        label="MOD_DD_GMAPS_MODULE_WIDTH_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_WIDTH_DESC"
+                />
+
+                <field
+                        name="height"
+                        type="number"
+                        default="0"
+                        label="MOD_DD_GMAPS_MODULE_HEIGHT_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_HEIGHT_DESC"
+                />
+
+            </fieldset>
+
+            <!-- Default Address -->
+            <fieldset name="default_address"
+                      label="MOD_DD_GMAPS_MODULE_DEFAULT_ADDRESS_LABEL"
+                      description="MOD_DD_GMAPS_MODULE_DEFAULT_ADDRESS_DESC"
+            >
+
+                <field name="location_name"
+                       type="text"
+                       class="inputbox"
+                       size="40"
+                       label="MOD_DD_GMAPS_MODULE_LOCATION_NAME_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_LOCATION_NAME_DESC"
+                />
+
+                <field
+                        name="set_as_default_position"
+                        type="list"
+                        label="MOD_DD_GMAPS_MODULE_SET_AS_DEFAULT_POSITION_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_SET_AS_DEFAULT_POSITION_DESC"
+                        default="0"
+                >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="street"
+                       type="text"
+                       class="inputbox"
+                       size="40"
+                       label="MOD_DD_GMAPS_MODULE_STREET_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_STREET_DESC"
+                       required="true"
+                />
+
+                <field name="location"
+                       type="text"
+                       class="inputbox"
+                       size="40"
+                       label="MOD_DD_GMAPS_MODULE_LOCATION_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_LOCATION_DESC"
+                       required="true"
+                />
+
+                <field name="zip"
+                       type="text"
+                       class="inputbox"
+                       size="40"
+                       label="MOD_DD_GMAPS_MODULE_ZIP_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_ZIP_DESC"
+                       required="true"
+                />
+
+                <fieldset addfieldpath="/modules/mod_dd_gmaps_module/fields">
+                    <field name="country" type="country" label="MOD_DD_GMAPS_MODULE_COUNTRY_LABEL"
+                           description="MOD_DD_GMAPS_MODULE_COUNTRY_DESC"
+                           required="true" />
+                </fieldset>
+
+                <field name="federalstate"
+                       type="text"
+                       class="inputbox"
+                       size="40"
+                       label="MOD_DD_GMAPS_MODULE_FEDERALSTATE_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_FEDERALSTATE_DESC"/>
+
+                <field name="latitude"
+                       type="text"
+                       default="48.0000000"
+                       label="MOD_DD_GMAPS_MODULE_LATITUDE_LABEL"
+                       readonly="true"
+                       class="readonly"
+                       description="MOD_DD_GMAPS_MODULE_LATITUDE_DESC"
+                />
+
+                <field name="longitude"
+                       type="text"
+                       default="2.0000000"
+                       label="MOD_DD_GMAPS_MODULE_LONGITUDE_LABEL"
+                       readonly="true"
+                       class="readonly"
+                       description="MOD_DD_GMAPS_MODULE_LONGITUDE_DESC"
+                />
+
+            </fieldset>
+            <!-- Google API Settings -->
+            <fieldset name="google_api_settings"
+                      label="MOD_DD_GMAPS_MODULE_API_SETTINGS_LABEL"
+                      description="MOD_DD_GMAPS_MODULE_API_SETTINGS_DESC"
+            >
+
+                <field name="google_api_key_js_places"
+                       type="text"
+                       label="MOD_DD_GMAPS_MODULE_API_KEY_JS_PLACES_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_API_KEY_JS_PLACES_DESC"
+                />
+
+                <field name="google_api_key_geocode"
+                       type="text"
+                       label="MOD_DD_GMAPS_MODULE_API_KEY_GEOCODE_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_API_KEY_GEOCODE_DESC"
+                />
+
+            </fieldset>
+
+            <!-- Marker Images -->
+            <fieldset name="marker"
+                      label="MOD_DD_GMAPS_MODULE_MARKER_SETTINGS_LABEL"
+                      description="MOD_DD_GMAPS_MODULE_MARKER_SETTINGS_DESC"
+            >
+
+                <field name="marker_image"
+                       type="media"
+                       directory="dd_gmaps_module"
+                       size="40"
+                       label="MOD_DD_GMAPS_MODULE_MARKER_IMAGE_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_MARKER_IMAGE_DESC"
+                />
+
+                <field name="clustermarker_image"
+                       type="media"
+                       directory="dd_gmaps_module"
+                       size="40"
+                       label="MOD_DD_GMAPS_MODULE_CLUSTERMARKER_IMAGE_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_CLUSTERMARKER_IMAGE_DESC"
+                />
+
+            </fieldset>
+
+            <fieldset name="advanced">
+                <field
+                        name="layout"
+                        type="modulelayout"
+                        label="JFIELD_ALT_LAYOUT_LABEL"
+                        description="JFIELD_ALT_MODULE_LAYOUT_DESC"
+                />
+            </fieldset>
+        </fields>
+    </config>
+
+    <languages folder="language">
+        <language tag="en-GB">en-GB/en-GB.mod_dd_gmaps_module.ini</language>
+        <language tag="de-DE">de-DE/de-DE.mod_dd_gmaps_module.ini</language>
+    </languages>
+
+    <media destination="mod_dd_gmaps_module" folder="media">
+        <folder>css</folder>
+        <folder>js</folder>
+    </media>
+
+    <!-- Update servers -->
+    <updateservers>
+        <server type="collection" priority="1" name="HR IT-Solutions Updates">http://www.hr-it-solutions.com/jextensions/update.xml</server>
+    </updateservers>
+</extension>
