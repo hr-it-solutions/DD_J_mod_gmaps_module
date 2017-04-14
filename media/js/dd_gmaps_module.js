@@ -27,7 +27,7 @@ var initialize = function initialize() // Initializes Google Map
     var googleMapOptions =
         {
             center: home,
-            zoom: 4,
+            zoom: settingsZoomLevel, // from settings
             panControl: true,
             zoomControl: true,
             scaleControl: true,
@@ -63,7 +63,7 @@ var initialize = function initialize() // Initializes Google Map
     var clusterStyles = [
         {
             textColor: 'white',
-            url: clusterIcon, // from global
+            url: settingsClusterIcon, // from settings
             height: 55,
             width: 56,
             backgroundPosition: '0 -1px'
