@@ -8,6 +8,8 @@
 
 defined('_JEXEC') or die;
 
+JHtml::_('jQuery.Framework');
+
 $app = JFactory::getApplication();
 $input = $app->input;
 
