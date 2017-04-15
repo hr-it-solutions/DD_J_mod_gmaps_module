@@ -74,48 +74,64 @@ var initialize = function initialize() // Initializes Google Map
 
 function launchInfoWindow(i) {
     setTimeout(function(){
-        // Scroll to top
-        window.scroll(0, 0);
 
-        // Config and add marker
-        var pushLocation = new google.maps.LatLng(GMapsLocations[i].lat, GMapsLocations[i].lng);
-        var marker = new google.maps.Marker({ // add marker
-            position:pushLocation,
-            map: map,
-            draggable:true,
-            // animation: google.maps.Animation.DROP, // Animation adding feature
-            icon: GMapsLocations[i].icon
-        });
+        if (typeof map !== 'undefined') {
 
-        map.setCenter(marker.getPosition());
+            // Scroll to top
+            window.scroll(0, 0);
 
-        // Config and open infoWindows
-        infowindow.setContent(GMapsLocations[i].content);
-        infowindow.open(map, marker);
+            // Config and add marker
+            var pushLocation = new google.maps.LatLng(GMapsLocations[i].lat, GMapsLocations[i].lng);
+            var marker = new google.maps.Marker({ // add marker
+                position:pushLocation,
+                map: map,
+                draggable:true,
+                // animation: google.maps.Animation.DROP, // Animation adding feature
+                icon: GMapsLocations[i].icon
+            });
+
+            map.setCenter(marker.getPosition());
+
+            // Config and open infoWindows
+            infowindow.setContent(GMapsLocations[i].content);
+            infowindow.open(map, marker);
+
+        }
+        else
+        {
+            launchInfoWindow(i)
+        }
     }, 400);
 }
 
 function launchLocateInfoWindow(lat,lng,content,zoom,markertitle,merkericon) {
     setTimeout(function(){
-        // Scroll to top
-        window.scroll(0, 0);
+        if (typeof map !== 'undefined')
+        {
+            // Scroll to top
+            window.scroll(0, 0);
 
-        // Config and add marker
-        var pushLocation = new google.maps.LatLng(lat, lng);
-        var marker = new google.maps.Marker({ // add marker
-            position:pushLocation,
-            map: map,
-            draggable:true,
-            animation: google.maps.Animation.DROP, // Animation adding feature
-            title: markertitle,
-            icon: merkericon
-        });
+            // Config and add marker
+            var pushLocation = new google.maps.LatLng(lat, lng);
+            var marker = new google.maps.Marker({ // add marker
+                position: pushLocation,
+                map: map,
+                draggable: true,
+                animation: google.maps.Animation.DROP, // Animation adding feature
+                title: markertitle,
+                icon: merkericon
+            });
 
-        map.setZoom(zoom);
-        map.setCenter(marker.getPosition());
+            map.setZoom(zoom);
+            map.setCenter(marker.getPosition());
 
-        // Config and open infoWindows
-        infowindow.setContent(content);
-        infowindow.open(map, marker);
-    }, 800);
+            // Config and open infoWindows
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+        }
+        else
+        {
+            launchLocateInfoWindow(lat,lng,content,zoom,markertitle,merkericon)
+        }
+    }, 400);
 }
