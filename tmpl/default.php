@@ -21,8 +21,15 @@ $items = $instance->getItems();
 
 $sef_rewrite  = JFactory::getConfig()->get('sef_rewrite');
 $active_alias = $app->getMenu()->getActive()->alias;
-
-$varProducerIndex = 0;
+?>
+<div class="dd_gmaps_module">
+<?php
+// If force_map_size is enabled
+if($params->get('force_map_size')){
+    $width  = intval($params->get('width')) . 'px';
+    $height = intval($params->get('height')) . 'px';
+    echo "<style>#dd_gmaps { width: $width; height: $height; }</style>";
+}
 ?>
 <script type="text/javascript">
     jQuery( document ).ready(function() { init_default_itemsJS(); });
@@ -48,20 +55,16 @@ $varProducerIndex = 0;
         },<?php
     endforeach; ?>
     ];
-
-    // Initializes InfoWindow global
+    // Initialize Map
     var infowindow = new google.maps.InfoWindow();
-
     google.maps.event.addDomListener(window, 'load', initialize);
-
     <?php
-
     // Geolocate info window launcher
     if ($input->get("geolocate","STRING") == "locate")
     {
-        $locationLatLng = explode(",", $input->get("locationLatLng","","STRING"));
-        $lat = substr($locationLatLng[0],0,10);
-        $lng = substr($locationLatLng[1],0,10);
+        $locationLatLng = explode(",", $input->get("locationLatLng", "", "STRING"));
+        $lat = substr($locationLatLng[0], 0, 10);
+        $lng = substr($locationLatLng[1], 0, 10);
         $content = "<h2>" .
             JText::_('MOD_DD_GMAPS_MODULE_YOUR_LOCATION') . "</h2><b>" .
             JText::_('MOD_DD_GMAPS_MODULE_YOUR_LATITUDE') . ":</b> $lat<br><b>" .
@@ -75,10 +78,10 @@ $varProducerIndex = 0;
     // Show profile info window
     if ($input->get('profile_id') != 0 || $i == 0)
     {
-        echo 'setTimeout(function(){';
-	    echo 'var profileObj = jQuery.grep(GMapsLocations, function(e){ return e.id == ' . $input->get('profile_id', $i) .'; });';
-	    echo 'launchInfoWindow(profileObj[0].key)';
-	    echo '}, 800);';
+        echo 'setTimeout(function(){
+                var profileObj = jQuery.grep(GMapsLocations, function(e){ return e.id == ' . $input->get('profile_id', $i) .'; });
+                launchInfoWindow(profileObj[0].key)
+              }, 800);';
     } ?>
 </script>
 <?php
@@ -92,3 +95,4 @@ if($params->get('fullsize')): ?>
     <p class="dd_gmaps_loader"><?php echo JText::_('MOD_DD_GMAPS_MODULE_MAPS_PRELOADER'); ?></p>
 </div>
 <div class="clear"></div>
+</div>
