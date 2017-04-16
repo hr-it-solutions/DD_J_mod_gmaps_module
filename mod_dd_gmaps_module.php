@@ -15,6 +15,12 @@ $doc = JFactory::getDocument();
 // Include the functions only once
 JLoader::register('ModDD_GMaps_Module_Helper', __DIR__ . '/helper.php');
 
+// Check if plugin geocode is enabled
+if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode'))
+{
+	JFactory::getApplication()->enqueueMessage(JText::_('MOD_DD_GMAPS_MODULE_WARNING_GEOCODE_PLUGIN_MUST_BE_ENABLED'), 'warning');
+}
+
 $google_PlacesAPI = 'js?&libraries=places&v=3';
 $google_PlacesAPI_Key = '&key=' . $params->get('google_api_key_js_places','');
 
