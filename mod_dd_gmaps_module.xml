@@ -12,7 +12,6 @@
     <files>
         <filename module="mod_dd_gmaps_module">mod_dd_gmaps_module.php</filename>
         <filename>helper.php</filename>
-        <filename>LICENSE</filename>
         <folder>countries</folder>
         <folder>fields</folder>
         <folder>tmpl</folder>
