@@ -37,7 +37,7 @@
                         type="list"
                         label="MOD_DD_GMAPS_MODULE_FULLSIZE_LABEL"
                         description="MOD_DD_GMAPS_MODULE_FULLSIZE_DESC"
-                        default="1"
+                        default="0"
                 >
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>

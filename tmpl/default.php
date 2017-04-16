@@ -79,9 +79,15 @@ $varProducerIndex = 0;
 	    echo 'var profileObj = jQuery.grep(GMapsLocations, function(e){ return e.id == ' . $input->get('profile_id', $i) .'; });';
 	    echo 'launchInfoWindow(profileObj[0].key)';
 	    echo '}, 800);';
-    }
-    ?>
+    } ?>
 </script>
+<?php
+// Show fullsize
+if($params->get('fullsize')): ?>
+<div id="dd_gmaps_fullsize" class="pull-left">
+    <button onclick="toggleFullSize()" class="btn fullsize-btn"><?php echo JText::_('MOD_DD_GMAPS_MODULE_FULLSIZE'); ?></button>
+</div>
+<?php endif; ?>
 <div id="dd_gmaps">
     <p class="dd_gmaps_loader"><?php echo JText::_('MOD_DD_GMAPS_MODULE_MAPS_PRELOADER'); ?></p>
 </div>

@@ -135,3 +135,10 @@ function launchLocateInfoWindow(lat,lng,content,zoom,markertitle,merkericon) {
         }
     }, 400);
 }
+
+function toggleFullSize() {
+    jQuery('#dd_gmaps_fullsize').toggleClass('fullsize btn-alert');
+    jQuery('.fullsize-btn').toggleClass('btn-danger');
+    jQuery('#dd_gmaps').toggleClass('fullsize');
+    google.maps.event.trigger(map, "resize");
+}
