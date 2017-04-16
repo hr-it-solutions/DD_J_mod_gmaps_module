@@ -212,7 +212,9 @@
 
     <languages folder="language">
         <language tag="en-GB">en-GB/en-GB.mod_dd_gmaps_module.ini</language>
+        <language tag="en-GB">en-GB/en-GB.mod_dd_gmaps_module.sys.ini</language>
         <language tag="de-DE">de-DE/de-DE.mod_dd_gmaps_module.ini</language>
+        <language tag="de-DE">de-DE/de-DE.mod_dd_gmaps_module.sys.ini</language>
     </languages>
 
     <media destination="mod_dd_gmaps_module" folder="media">
