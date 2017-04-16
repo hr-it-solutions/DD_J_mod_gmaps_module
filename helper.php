@@ -130,15 +130,18 @@ class ModDD_GMaps_Module_Helper
 		$return[0]->zip            = $params->get('zip', '');
 		$return[0]->country        = $params->get('country', '');
 
-		// Get latitude and longitude
-		$latlng = $this->Geocode_Location_To_LatLng($return, $params->get('google_api_key_geocode'));
+		// Try to get geoCode address parameter > geoCoded via dd_gmaps_locations_geocode plugin or default value
+		$return[0]->latitude       = $params->get('latitude', '48.0000000');
+		$return[0]->latitude       = $params->get('longitude', '2.0000000');
 
-		// Set latitude and longitude
-		$params->set('latitude', $latlng['latitude']);
-		$params->set('longitude', $latlng['longitude']);;
-
-		$return[0]->latitude   = $latlng['latitude'];
-		$return[0]->longitude  = $latlng['longitude'];
+		// If geoCode plugin is not enabled, geCode addresses on the fly without saving!
+		if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode'))
+		{
+			// Get latitude and longitude
+			$latlng = $this->Geocode_Location_To_LatLng($return, $params->get('google_api_key_geocode'));
+			$return[0]->latitude   = $latlng['latitude'];
+			$return[0]->longitude  = $latlng['longitude'];
+		}
 
 		return $return;
 	}
