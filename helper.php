@@ -132,7 +132,7 @@ class ModDD_GMaps_Module_Helper
 
 		// Try to get geoCode address parameter > geoCoded via dd_gmaps_locations_geocode plugin or default value
 		$return[0]->latitude       = $params->get('latitude', '48.0000000');
-		$return[0]->latitude       = $params->get('longitude', '2.0000000');
+		$return[0]->longitude      = $params->get('longitude', '2.0000000');
 
 		// If geoCode plugin is not enabled, geCode addresses on the fly without saving!
 		if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode'))
