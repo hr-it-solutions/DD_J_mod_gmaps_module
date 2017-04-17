@@ -186,6 +186,10 @@ class ModDD_GMaps_Module_Helper
 
 			return false;
 		}
+		elseif($output->status == 'ZERO_RESULTS')
+		{
+			JFactory::getApplication()->enqueueMessage(JText::_('MOD_DD_GMAPS_MODULE_API_ALERT_GEOLOCATION_FAILED_ZERO_RESULTS'), 'warning');
+		}
 
 		// Build array latitude and longitude
 		$latlng = array("latitude"  => $output->results[0]->geometry->location->lat,
