@@ -1,4 +1,4 @@
-<extension type="module" version="3.6" method="upgrade">
+<extension type="module" version="3.5.0" method="upgrade">
     <name>mod_dd_gmaps_module</name>
     <creationDate>06.04.2017</creationDate>
     <author>HR IT-Solutions Florian Häusler</author>
