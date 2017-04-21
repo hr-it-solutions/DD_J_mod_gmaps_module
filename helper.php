@@ -28,7 +28,8 @@ class ModDD_GMaps_Module_Helper
 	public function isDDGMapsLocationsExtended()
 	{
 		// If DD GMaps Locations
-		if (JComponentHelper::getComponent('com_dd_gmaps_locations', true)->enabled
+		if (file_exists(JPATH_ADMINISTRATOR . '/components/com_dd_gmaps_locations/dd_gmaps_locations.php')
+			&& JComponentHelper::getComponent('com_dd_gmaps_locations', true)->enabled
 			&& JFactory::getApplication()->input->get('option') == 'com_dd_gmaps_locations')
 		{
 			return true;
