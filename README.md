@@ -14,7 +14,7 @@
 
 ##### Addon Features for DD Gmaps Locations Component
 - Locations Linked to the map
-- Profile pages liked to the map
+- Profile pages liked to the map (markers and info boxes)
 - Extends list layout to display multiple locations
 
 **and much more...**
