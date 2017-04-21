@@ -9,6 +9,7 @@
 - Validate a single addresses via the backend (geocoding of the address)
 - Google Maps v3 integration (API key connection possible) Integrated Google JavaScript API and Geocoding API
 - Adjustable map size, position and zoom level
+- Customizable markers, cluster markers and info box (PopUp by click on map)
 - Support all major web browsers
 
 ##### Addon Features for DD Gmaps Locations Component
@@ -17,6 +18,8 @@
 - Extends list layout to display multiple locations
 
 **and much more...**
+
+Errors and technical modification subject to change.
 
 ---
 **Note: This is just the module repository (mod_gmaps_module).**
