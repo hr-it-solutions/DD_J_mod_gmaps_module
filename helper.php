@@ -1,6 +1,6 @@
 <?php
 /**
- * @version    1-1-0-0 // Y-m-d 2017-04-06
+ * @version    1-1-0-1 // Y-m-d 2017-04-06
  * @author     HR IT-Solutions Florian Häusler https://www.hr-it-solutions.com
  * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
@@ -28,7 +28,8 @@ class ModDD_GMaps_Module_Helper
 	public function isDDGMapsLocationsExtended()
 	{
 		// If DD GMaps Locations
-		if (JComponentHelper::getComponent('com_dd_gmaps_locations', true)->enabled
+		if (file_exists(JPATH_ADMINISTRATOR . '/components/com_dd_gmaps_locations/dd_gmaps_locations.php')
+			&& JComponentHelper::getComponent('com_dd_gmaps_locations', true)->enabled
 			&& JFactory::getApplication()->input->get('option') == 'com_dd_gmaps_locations')
 		{
 			return true;
@@ -132,7 +133,7 @@ class ModDD_GMaps_Module_Helper
 
 		// Try to get geoCode address parameter > geoCoded via dd_gmaps_locations_geocode plugin or default value
 		$return[0]->latitude       = $params->get('latitude', '48.0000000');
-		$return[0]->latitude       = $params->get('longitude', '2.0000000');
+		$return[0]->longitude      = $params->get('longitude', '2.0000000');
 
 		// If geoCode plugin is not enabled, geCode addresses on the fly without saving!
 		if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode'))
