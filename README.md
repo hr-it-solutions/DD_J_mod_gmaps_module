@@ -18,6 +18,16 @@
 
 **and much more...**
 
+---
+**Note: This is just the module repository (mod_gmaps_module).**
+
+**To get the module package, including required system plugins, you need the module package installer compilation. [https://github.com/hr-it-solutions/DD_J_pkg_gmaps_module_package](https://github.com/hr-it-solutions/DD_J_pkg_gmaps_module_package)**
+
+**The [Module package](https://github.com/hr-it-solutions/DD_J_pkg_gmaps_module_package) installer compilation contains:**
+
+- mod_gmaps_module [GMaps Module](https://github.com/hr-it-solutions/DD_J_mod_gmaps_module)
+- plg_system_gmaps_locations_geocode [GMaps Locations GeoCode](https://github.com/hr-it-solutions/DD_J_plg_system_gmaps_locations_geocode)
+
 # System requirements
 Joomla 3.6 +                                                                                <br>
 PHP 5.6.13 or newer is recommended.
