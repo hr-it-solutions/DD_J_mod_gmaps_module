@@ -24,7 +24,7 @@
                         name="zoomlevel"
                         type="integer"
                         first="1"
-                        last="10"
+                        last="20"
                         step="1"
                         default="4"
                         label="MOD_DD_GMAPS_MODULE_ZOOMLEVEL_LABEL"
