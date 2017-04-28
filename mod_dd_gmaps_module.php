@@ -1,7 +1,8 @@
 <?php
 /**
- * @version    1-1-0-0 // Y-m-d 2017-04-06
- * @author     HR IT-Solutions Florian Häusler https://www.hr-it-solutions.com
+ * @package    DD_GMaps_Module
+ *
+ * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
  * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
@@ -22,7 +23,7 @@ if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode'))
 }
 
 $google_PlacesAPI = 'js?&libraries=places&v=3';
-$google_PlacesAPI_Key = '&key=' . $params->get('google_api_key_js_places','');
+$google_PlacesAPI_Key = '&key=' . $params->get('google_api_key_js_places', '');
 
 if (!ModDD_GMaps_Module_Helper::isset_Script($doc->_scripts, $google_PlacesAPI))
 {

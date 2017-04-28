@@ -3,7 +3,7 @@
 
 [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.png?v=102)](https://opensource.org/licenses/GPL-2.0/)
 
-#### Main Features
+#### Main Features:
 - Google Maps module
 - Map in Popup (full size PopUp)
 - Validate a single addresses via the backend (geocoding of the address)
@@ -12,7 +12,7 @@
 - Customizable markers, cluster markers and info box (PopUp by click on map)
 - Support all major web browsers
 
-##### Addon Features for DD Gmaps Locations Component
+##### Addon Features for DD Gmaps Locations Component:
 - Locations Linked to the map
 - Profile pages liked to the map (markers and info boxes)
 - Extends list layout to display multiple locations
