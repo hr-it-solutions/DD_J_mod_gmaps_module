@@ -1,10 +1,11 @@
 <?php
 /**
- * @version    1-1-0-0 // Y-m-d 2017-04-06
- * @author     HR IT-Solutions Florian Häusler https://www.hr-it-solutions.com
+ * @package    DD_GMaps_Module
+ *
+ * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
  * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
-**/
+ **/
 
 defined('_JEXEC') or die;
 
@@ -25,7 +26,8 @@ $active_alias = $app->getMenu()->getActive()->alias;
 <div class="dd_gmaps_module">
 <?php
 // If force_map_size is enabled
-if($params->get('force_map_size')){
+if ($params->get('force_map_size'))
+{
     $width  = intval($params->get('width')) . 'px';
     $height = intval($params->get('height')) . 'px';
     echo "<style>#dd_gmaps { width: $width; height: $height; }</style>";
@@ -38,6 +40,7 @@ if($params->get('force_map_size')){
         settingsZoomLevel = <?php  echo (int) $params->get('zoomlevel') ?>,
         GMapsLocations = [
     <?php
+	$location_index = 0;
     foreach ( $items as $i => $item ):
         $title = htmlspecialchars($item->title, ENT_QUOTES, 'UTF-8');
         if ($isDDGMapsLocationsExtended)
@@ -53,6 +56,7 @@ if($params->get('force_map_size')){
             icon: '<?php echo $instance->paramMarkerImage($params); ?>',
             content:'<?php echo '<span class="info-content">' . $title . '<br>' . htmlspecialchars($item->street,ENT_QUOTES,'UTF-8') . '<br>' . htmlspecialchars($item->location,ENT_QUOTES,'UTF-8') . '</span>'; ?>'
         },<?php
+	    $location_index = $i;
     endforeach; ?>
     ];
     // Initialize Map
@@ -76,10 +80,10 @@ if($params->get('force_map_size')){
     }
 
     // Show profile info window
-    if ($input->get('profile_id') != 0 || $i == 0)
+    if ($input->get('profile_id') != 0 || $location_index == 0)
     {
         echo 'setTimeout(function(){
-                var profileObj = jQuery.grep(GMapsLocations, function(e){ return e.id == ' . $input->get('profile_id', $i) .'; });
+                var profileObj = jQuery.grep(GMapsLocations, function(e){ return e.id == ' . $input->get('profile_id', $location_index) .'; });
                 launchInfoWindow(profileObj[0].key)
               }, 800);';
     } ?>

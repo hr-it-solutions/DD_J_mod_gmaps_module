@@ -1,7 +1,8 @@
 <?php
 /**
- * @version    1-1-0-1 // Y-m-d 2017-04-06
- * @author     HR IT-Solutions Florian Häusler https://www.hr-it-solutions.com
+ * @package    DD_GMaps_Module
+ *
+ * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
  * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
@@ -15,7 +16,6 @@ defined('_JEXEC') or die;
  */
 class ModDD_GMaps_Module_Helper
 {
-
 	protected $params;
 
 	/**
@@ -236,7 +236,7 @@ class ModDD_GMaps_Module_Helper
 	/**
 	 * Params helper to get latitude latitude
 	 *
-	 * @param   string  $params
+	 * @param   string  $params  parameter
 	 *
 	 * @return  boolean
 	 *
@@ -257,7 +257,7 @@ class ModDD_GMaps_Module_Helper
 	/**
 	 * Parameter helper to get marker image
 	 *
-	 * @param   string   $params
+	 * @param   string  $params  parameter
 	 *
 	 * @return  boolean
 	 *
@@ -278,7 +278,7 @@ class ModDD_GMaps_Module_Helper
 	/**
 	 * Parameter helper to get cluster marker image
 	 *
-	 * @param   string   $params
+	 * @param   string  $params  parameter
 	 *
 	 * @return  boolean
 	 *
