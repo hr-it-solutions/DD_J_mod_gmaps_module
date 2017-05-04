@@ -41,19 +41,29 @@ class ModDD_GMaps_Module_Helper
 	/**
 	 * getItems
 	 *
+	 * @param   boolean  $extended_location  extend single locations with DGMapsLocations locations
+	 * @param   boolean  $extended_only      load only extend locations
+	 *
 	 * @since Version 1.0.0.0
 	 *
 	 * @return mixed
 	 */
-	public function getItems()
+	public function getItems($extended_location = false, $extended_only = false)
 	{
-		if ($this->isDDGMapsLocationsExtended())
-		{
-			$items = $this->getDDGMapsLocatiosItems();
-		}
-		else
+		if ($extended_location == false)
 		{
 			$items = $this->getItem();
+		}
+		elseif ($extended_location && !$extended_only)
+		{
+			$items = array_merge(
+				$this->getItem(),
+				$this->getDDGMapsLocatiosItems()
+			);
+		}
+		elseif ($this->isDDGMapsLocationsExtended() || $extended_only)
+		{
+			$items = $this->getDDGMapsLocatiosItems();
 		}
 
 		return $items;
@@ -271,4 +281,41 @@ class ModDD_GMaps_Module_Helper
 			return JUri::base() . 'media/mod_dd_gmaps_module/img/marker_cluster.png';
 		}
 	}
+
+	/**
+	 * getLocationsView_menuItemAlias
+	 *
+	 * @return boolean|string
+	 *
+	 * @since   Version 1.1.0.6
+	 */
+	public function getLocationsView_menuItemAlias()
+	{
+		$db = JFactory::getDbo();
+		$db_query = $db->getQuery(true);
+		$db_query->select('alias')
+			->from($db->qn('#__menu'))
+			->where(
+				$db->qn('menutype') . '= ' . $db->q('com-gmaps-locations') . ' AND ' .
+				$db->qn('link') . '= ' . $db->q('index.php?option=com_dd_gmaps_locations&view=locations') . ' AND ' .
+				$db->qn('published') . '= ' . $db->q('1')
+			);
+		$db->setQuery($db_query);
+		$menuItemAlias = $db->loadResult();
+
+		if (!$menuItemAlias)
+		{
+			$lang = JFactory::getLanguage();
+			$lang->load('com_dd_gmaps_locations', JPATH_ROOT);
+
+			JFactory::getApplication()->enqueueMessage(
+				JText::_('COM_DD_GMAPS_LOCATIONS_LOCATIONS_MENU_ITEM_REQUIRED'), 'error'
+			);
+
+			return false;
+		}
+
+		return $menuItemAlias;
+	}
 }
+

@@ -16,12 +16,22 @@ $input = $app->input;
 
 $instance = new ModDD_GMaps_Module_Helper;
 
+$extended_location = $params->get('extended_location');
+$extended_only     = $params->get('only_extended_locations');
+
+//todo only_extended_locations
+
 $isDDGMapsLocationsExtended = $instance->isDDGMapsLocationsExtended();
 
-$items = $instance->getItems();
+$items = $instance->getItems($extended_location, $extended_only);
 
 $sef_rewrite  = JFactory::getConfig()->get('sef_rewrite');
 $active_alias = @$app->getMenu()->getActive()->alias;
+
+if ($params->get('extended_location'))
+{
+    $active_alias = $instance->getLocationsView_menuItemAlias();
+}
 ?>
 <div class="dd_gmaps_module">
 <?php
@@ -44,6 +54,11 @@ if ($params->get('force_map_size'))
     foreach ( $items as $i => $item ):
         $title = htmlspecialchars($item->title, ENT_QUOTES, 'UTF-8');
         if ($isDDGMapsLocationsExtended)
+        {
+	        $title_link = JRoute::_($sef_rewrite ? $active_alias . '/' . $item->alias : 'index.php?option=com_dd_gmaps_locations&view=profile&profile_id=' . $item->id);
+	        $title = '<a href="' . $title_link .'">' . $title .'</a>';
+        }
+        elseif($extended_location && $active_alias)
         {
 	        $title_link = JRoute::_($sef_rewrite ? $active_alias . '/' . $item->alias : 'index.php?option=com_dd_gmaps_locations&view=profile&profile_id=' . $item->id);
 	        $title = '<a href="' . $title_link .'">' . $title .'</a>';
@@ -80,6 +95,10 @@ if ($params->get('force_map_size'))
     }
 
     // Show profile info window
+    if($params->get('extended_location') && !$params->get('only_extended_locations'))
+    {
+	    $location_index = 0;
+    }
     if ($input->get('profile_id') != 0 || $location_index == 0)
     {
         echo 'setTimeout(function(){
