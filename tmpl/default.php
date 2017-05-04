@@ -97,7 +97,7 @@ $alias       = $instance->getLocationsView_Alias($app, $extended_location);
 		{
 			echo 'setTimeout(function(){
             var profileObj = jQuery.grep(GMapsLocations, function(e){ return e.id == ' . $input->get('profile_id', 0) . '; });
-            launchInfoWindow(profileObj[0].key)
+            if(typeof profileObj[0] !== "undefined"){launchInfoWindow(profileObj[0].key)}
           }, 800);';
 		} ?>
     </script>
