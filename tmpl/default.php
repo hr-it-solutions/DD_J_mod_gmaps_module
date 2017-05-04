@@ -21,7 +21,7 @@ $isDDGMapsLocationsExtended = $instance->isDDGMapsLocationsExtended();
 $items = $instance->getItems();
 
 $sef_rewrite  = JFactory::getConfig()->get('sef_rewrite');
-$active_alias = $app->getMenu()->getActive()->alias;
+$active_alias = @$app->getMenu()->getActive()->alias;
 ?>
 <div class="dd_gmaps_module">
 <?php
