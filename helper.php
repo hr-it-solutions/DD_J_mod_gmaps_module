@@ -316,38 +316,45 @@ class ModDD_GMaps_Module_Helper
 	 */
 	public function getLocationsView_Alias(&$app, $extended_location)
 	{
-		$activeAlias = @$app->getMenu()->getActive()->alias;
-
-		if ($activeAlias && $extended_location != true)
+		if ($this->existsDDGMapsLocations())
 		{
-			return $activeAlias;
+			$activeAlias = @$app->getMenu()->getActive()->alias;
+
+			if ($activeAlias && $extended_location != true)
+			{
+				return $activeAlias;
+			}
+
+			$db = JFactory::getDbo();
+			$db_query = $db->getQuery(true);
+			$db_query->select('alias')
+				->from($db->qn('#__menu'))
+				->where(
+					$db->qn('menutype') . '= ' . $db->q('com-gmaps-locations') . ' AND ' .
+					$db->qn('link') . '= ' . $db->q('index.php?option=com_dd_gmaps_locations&view=locations') . ' AND ' .
+					$db->qn('published') . '= ' . $db->q('1')
+				);
+			$db->setQuery($db_query);
+			$menuItemAlias = $db->loadResult();
+
+			if (!$menuItemAlias)
+			{
+				$lang = JFactory::getLanguage();
+				$lang->load('com_dd_gmaps_locations', JPATH_ROOT);
+
+				JFactory::getApplication()->enqueueMessage(
+					JText::_('COM_DD_GMAPS_LOCATIONS_LOCATIONS_MENU_ITEM_REQUIRED'), 'error'
+				);
+
+				return false;
+			}
+
+			return $menuItemAlias;
 		}
-
-		$db = JFactory::getDbo();
-		$db_query = $db->getQuery(true);
-		$db_query->select('alias')
-			->from($db->qn('#__menu'))
-			->where(
-				$db->qn('menutype') . '= ' . $db->q('com-gmaps-locations') . ' AND ' .
-				$db->qn('link') . '= ' . $db->q('index.php?option=com_dd_gmaps_locations&view=locations') . ' AND ' .
-				$db->qn('published') . '= ' . $db->q('1')
-			);
-		$db->setQuery($db_query);
-		$menuItemAlias = $db->loadResult();
-
-		if (!$menuItemAlias)
+		else
 		{
-			$lang = JFactory::getLanguage();
-			$lang->load('com_dd_gmaps_locations', JPATH_ROOT);
-
-			JFactory::getApplication()->enqueueMessage(
-				JText::_('COM_DD_GMAPS_LOCATIONS_LOCATIONS_MENU_ITEM_REQUIRED'), 'error'
-			);
-
 			return false;
 		}
-
-		return $menuItemAlias;
 	}
 }
 
