@@ -33,10 +33,11 @@
 
                 <field
                         name="fullsize"
-                        type="list"
+                        type="radio"
                         label="MOD_DD_GMAPS_MODULE_FULLSIZE_LABEL"
                         description="MOD_DD_GMAPS_MODULE_FULLSIZE_DESC"
                         default="0"
+                        class="btn-group btn-group-yesno"
                 >
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
@@ -59,7 +60,7 @@
                 <field
                         name="width"
                         type="number"
-                        default="0"
+                        default="250"
                         label="MOD_DD_GMAPS_MODULE_WIDTH_LABEL"
                         description="MOD_DD_GMAPS_MODULE_WIDTH_DESC"
                 />
@@ -67,7 +68,7 @@
                 <field
                         name="height"
                         type="number"
-                        default="0"
+                        default="250"
                         label="MOD_DD_GMAPS_MODULE_HEIGHT_LABEL"
                         description="MOD_DD_GMAPS_MODULE_HEIGHT_DESC"
                 />
