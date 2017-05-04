@@ -285,12 +285,24 @@ class ModDD_GMaps_Module_Helper
 	/**
 	 * getLocationsView_menuItemAlias
 	 *
+	 * Try to get active view alias
+	 * If failed try to get default locations view alias
+	 *
+	 * @param   Joomla\Application\  &$app  Application
+	 *
 	 * @return boolean|string
 	 *
 	 * @since   Version 1.1.0.6
 	 */
-	public function getLocationsView_menuItemAlias()
+	public function getLocationsView_Alias(&$app, $extended_location)
 	{
+		$activeAlias = @$app->getMenu()->getActive()->alias;
+
+		if ($activeAlias && $extended_location != true)
+		{
+			return $activeAlias;
+		}
+
 		$db = JFactory::getDbo();
 		$db_query = $db->getQuery(true);
 		$db_query->select('alias')
