@@ -15,8 +15,15 @@ $app      = JFactory::getApplication();
 $instance = new ModDD_GMaps_Module_Helper;
 $input    = $app->input;
 
-$extended_location = $params->get('extended_location');
-$extended_only     = $params->get('only_extended_locations');
+if(!$instance->existsDDGMapsLocations())
+{
+	$extended_only = $extended_location = 0;
+}
+else
+{
+	$extended_location = $params->get('extended_location');
+	$extended_only     = $params->get('only_extended_locations');
+}
 
 $isDDGMapsLocationsExtended = $instance->isDDGMapsLocationsExtended();
 $items                      = $instance->getItems($extended_location, $extended_only);

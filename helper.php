@@ -19,7 +19,26 @@ class ModDD_GMaps_Module_Helper
 	protected $params;
 
 	/**
-	 * getItems
+	 * existsDDGMapsLocations
+	 *
+	 * @since Version 1.1.0.6
+	 *
+	 * @return boolean
+	 */
+	public function existsDDGMapsLocations()
+	{
+		// If DD GMaps Locations
+		if (file_exists(JPATH_ADMINISTRATOR . '/components/com_dd_gmaps_locations/dd_gmaps_locations.php')
+			&& JComponentHelper::getComponent('com_dd_gmaps_locations', true)->enabled)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * isDDGMapsLocationsExtended
 	 *
 	 * @since Version 1.0.0.0
 	 *
@@ -288,7 +307,8 @@ class ModDD_GMaps_Module_Helper
 	 * Try to get active view alias
 	 * If failed try to get default locations view alias
 	 *
-	 * @param   Joomla\Application\  &$app  Application
+	 * @param   Joomla\Application\  &$app               Application
+	 * @param   boolean              $extended_location  extended location
 	 *
 	 * @return boolean|string
 	 *
