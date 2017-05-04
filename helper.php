@@ -70,40 +70,12 @@ class ModDD_GMaps_Module_Helper
 	 */
 	protected function getDDGMapsLocatiosItems()
 	{
-		$db    = JFactory::getDbo();
-		$query = $db->getQuery(true);
+		jimport('joomla.application.component.model');
+		JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_dd_gmaps_locations/models');
 
-		$select = $db->qn(
-			array(
-				'a.id',
-				'a.title',
-				'a.alias',
-				'a.catid',
-				'a.state',
-				'a.profileimage',
-				'a.company',
-				'a.street',
-				'a.location',
-				'a.zip',
-				'a.country',
-				'a.federalstate',
-				'a.latitude',
-				'a.longitude'
-			)
-		);
+		$model = JModelLegacy::getInstance('Locations', 'DD_GMaps_LocationsModel');
 
-		$query->select($select)->from($db->qn('#__dd_gmaps_locations', 'a'));
-
-		// Filter state
-		$query->where('a.state = 1');
-
-		// Join over categories
-		$query->select($db->qn('c.title', 'category_title'))
-			->leftJoin($db->qn('#__categories', 'c') . ' ON (' . $db->qn('c.id') . ' = ' . $db->qn('a.catid') . ')');
-
-		$query->order('a.id DESC');
-
-		return $db->setQuery($query)->loadObjectList();
+		return $model->getItems();
 	}
 
 	/**
