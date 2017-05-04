@@ -93,16 +93,10 @@ $alias       = $instance->getLocationsView_Alias($app, $extended_location);
 			echo "launchLocateInfoWindow($lat,$lng,'$content',$zoom,'$markertitle','$markericon');";
 		}
 
-		// Show profile info window
-		if ($params->get('extended_location') && !$params->get('only_extended_locations'))
-		{
-			$location_index = 0;
-		}
-
 		if ($input->get('profile_id') != 0 || $location_index == 0)
 		{
 			echo 'setTimeout(function(){
-            var profileObj = jQuery.grep(GMapsLocations, function(e){ return e.id == ' . $input->get('profile_id', $location_index) . '; });
+            var profileObj = jQuery.grep(GMapsLocations, function(e){ return e.id == ' . $input->get('profile_id', 0) . '; });
             launchInfoWindow(profileObj[0].key)
           }, 800);';
 		} ?>
