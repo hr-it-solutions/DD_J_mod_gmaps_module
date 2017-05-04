@@ -75,7 +75,11 @@ class ModDD_GMaps_Module_Helper
 
 		$model = JModelLegacy::getInstance('Locations', 'DD_GMaps_LocationsModel');
 
-		return $model->getItems();
+		$db = JFactory::getDbo();
+		$query = $model->getListQuery();
+		$db->setQuery($query);
+
+		return $db->loadObjectList();
 	}
 
 	/**
