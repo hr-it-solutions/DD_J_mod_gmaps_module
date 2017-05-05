@@ -30,18 +30,25 @@ $sef_rewrite = JFactory::getConfig()->get('sef_rewrite');
 $alias       = $instance->getLocationsView_Alias($app, $extended_location);
 
 /**
- * Sanitize_output function by Paul Phillips
+ * Adapted sanitize output function by Paul Phillips
  * http://stackoverflow.com/questions/6225351/how-to-minify-php-page-html-output#answer-6225706
+ *
+ * @param   string  $buffer  javascript
+ *
+ * @return string
+ *
+ * @sincer Version 1.1.0.8
  **/
-function sanitize_output($buffer)
+function Sanitize_output($buffer)
 {
 	$search = array('/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s');
 	$replace = array('>', '<', '\\1', '');
 	$buffer = preg_replace($search, $replace, $buffer);
+
 	return $buffer;
 }
 
-ob_start("sanitize_output");
+ob_start("Sanitize_output");
 ?>
 jQuery(document).ready(function () {
     init_default_itemsJS();
@@ -69,8 +76,8 @@ var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?
 		if ($extended_location && $item->category_params && json_decode($item->category_params)->image)
 		{
 			$imagefile = str_replace('\\', '/', json_decode($item->category_params)->image);
-			$icon = JUri::base() . $imagefile;
-			$size = getimagesize($imagefile);
+			$icon      = JUri::base() . $imagefile;
+			$size      = getimagesize($imagefile);
 
 			// Calculate height based on image width
 			$height = round($size[1] / $size[0] * 30);
