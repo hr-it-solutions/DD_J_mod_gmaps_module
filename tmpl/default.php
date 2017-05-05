@@ -21,11 +21,6 @@ JHtml::_('jQuery.Framework');
 		$height = intval($params->get('height')) . 'px';
 		echo "<style>#dd_gmaps { width: $width; height: $height; }</style>";
 	}
-	?>
-    <script type="text/javascript">
-		<?php include "modules/mod_dd_gmaps_module/inc/default.js.php"; ?>
-    </script>
-	<?php
 	// Show fullsize
 	if ($params->get('fullsize')): ?>
         <div id="dd_gmaps_fullsize" class="pull-left">
