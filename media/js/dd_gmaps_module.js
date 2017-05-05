@@ -6,7 +6,7 @@
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
-var map;
+;var map;
 var markers = [];
 
 var init_default_itemsJS = function () {

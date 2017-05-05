@@ -6,7 +6,7 @@
     <authorUrl>https://www.hr-it-solutions.com</authorUrl>
     <copyright>Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions</copyright>
     <license>GNU/GPLv2 only</license>
-    <version>1.1.0.5</version>
+    <version>1.1.0.8</version>
     <description>MOD_DD_GMAPS_MODULE_XML_DESCRIPTION</description>
 
     <files>
@@ -14,6 +14,7 @@
         <filename>helper.php</filename>
         <folder>countries</folder>
         <folder>fields</folder>
+        <folder>inc</folder>
         <folder>tmpl</folder>
     </files>
     <config>
@@ -33,21 +34,25 @@
 
                 <field
                         name="fullsize"
-                        type="list"
+                        type="radio"
                         label="MOD_DD_GMAPS_MODULE_FULLSIZE_LABEL"
                         description="MOD_DD_GMAPS_MODULE_FULLSIZE_DESC"
                         default="0"
+                        class="btn-group btn-group-yesno"
                 >
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
 
+                <field type="spacer" name="spacer" label="&lt;hr/&gt;" />
+
                 <field
                         name="force_map_size"
-                        type="list"
+                        type="radio"
                         label="MOD_DD_GMAPS_MODULE_FORCE_MAP_SIZE_LABEL"
                         description="MOD_DD_GMAPS_MODULE_FORCE_MAP_SIZE_DESC"
                         default="0"
+                        class="btn-group btn-group-yesno"
                 >
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
@@ -56,7 +61,7 @@
                 <field
                         name="width"
                         type="number"
-                        default="0"
+                        default="250"
                         label="MOD_DD_GMAPS_MODULE_WIDTH_LABEL"
                         description="MOD_DD_GMAPS_MODULE_WIDTH_DESC"
                 />
@@ -64,7 +69,7 @@
                 <field
                         name="height"
                         type="number"
-                        default="0"
+                        default="250"
                         label="MOD_DD_GMAPS_MODULE_HEIGHT_LABEL"
                         description="MOD_DD_GMAPS_MODULE_HEIGHT_DESC"
                 />
@@ -196,6 +201,36 @@
                        label="MOD_DD_GMAPS_MODULE_CLUSTERMARKER_IMAGE_LABEL"
                        description="MOD_DD_GMAPS_MODULE_CLUSTERMARKER_IMAGE_DESC"
                 />
+
+            </fieldset>
+
+            <fieldset  name="addonfeatures"
+                       label="MOD_DD_GMAPS_MODULE_ADDONFEATURES_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_ADDONFEATURES_DESC">
+
+                <field type="spacer" name="addonfeatures" label="MOD_DD_GMAPS_MODULE_ADDON_DDGMAPS_LOCATIONS" />
+
+                <field
+                        name="extended_location"
+                        type="radio"
+                        default="0"
+                        label="MOD_DD_GMAPS_MODULE_EXTENDED_LOCATION_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_EXTENDED_LOCATION_DESC"
+                        class="btn-group btn-group-yesno">
+                    <option value="1">Extended</option>
+                    <option value="0">Single Location</option>
+                </field>
+
+                <field
+                        name="only_extended_locations"
+                        type="radio"
+                        default="0"
+                        label="MOD_DD_GMAPS_MODULE_ONLY_EXTENDED_LOCATIONS_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_ONLY_EXTENDED_LOCATIONS_DESC"
+                        class="btn-group btn-group-yesno">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
 
             </fieldset>
 
