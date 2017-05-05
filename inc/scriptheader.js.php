@@ -30,12 +30,15 @@ $sef_rewrite = JFactory::getConfig()->get('sef_rewrite');
 $alias       = $instance->getLocationsView_Alias($app, $extended_location);
 
 /**
- * Adapted sanitize output function by Paul Phillips
+ * Sanitize output function by Paul Phillips
  * http://stackoverflow.com/questions/6225351/how-to-minify-php-page-html-output#answer-6225706
+ *
+ * Output minimization
+ * Adds the ScriptDeclaration to header
  *
  * @param   string  $buffer  javascript
  *
- * @return string
+ * @return boolean
  *
  * @sincer Version 1.1.0.8
  **/
@@ -45,7 +48,9 @@ function Sanitize_output($buffer)
 	$replace = array('>', '<', '\\1', '');
 	$buffer = preg_replace($search, $replace, $buffer);
 
-	return $buffer;
+	JFactory::getDocument()->addScriptDeclaration($buffer);
+
+	return true;
 }
 
 ob_start("Sanitize_output");
