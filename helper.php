@@ -9,6 +9,8 @@
 
 defined('_JEXEC') or die;
 
+$checkMultiload_DD_GMaps_Module = true;
+
 /**
  * Helper for mod_dd_gmaps_module
  *
@@ -357,4 +359,3 @@ class ModDD_GMaps_Module_Helper
 		}
 	}
 }
-
