@@ -78,7 +78,7 @@ var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?
 			$title      = '<a href="' . $title_link . '">' . $title . '</a>';
 		}
 
-		if ($extended_location && $item->category_params && json_decode($item->category_params)->image)
+		if ($extended_location && isset($item->category_params) && json_decode($item->category_params)->image)
 		{
 			$imagefile = str_replace('\\', '/', json_decode($item->category_params)->image);
 			$icon      = JUri::base() . $imagefile;
