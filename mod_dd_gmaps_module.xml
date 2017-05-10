@@ -213,7 +213,7 @@
                 <field
                         name="extended_location"
                         type="radio"
-                        default="0"
+                        default="1"
                         label="MOD_DD_GMAPS_MODULE_EXTENDED_LOCATION_LABEL"
                         description="MOD_DD_GMAPS_MODULE_EXTENDED_LOCATION_DESC"
                         class="btn-group btn-group-yesno">

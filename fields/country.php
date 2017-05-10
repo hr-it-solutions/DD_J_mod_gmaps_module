@@ -34,7 +34,7 @@ class JFormFieldCountry extends JFormFieldList {
 
 		$options = array();
 
-		$this->countries_json_path = dirname(__FILE__, 2) .
+		$this->countries_json_path = __DIR__ . '/..' .
 			'/countries/' . $this->countries_json;
 
 		if (JFile::exists($this->countries_json_path))
