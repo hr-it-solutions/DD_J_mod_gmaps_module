@@ -69,7 +69,6 @@ if (!ModDD_GMaps_Module_Helper::isset_Script($doc->_scripts, $Places_API))
 
 $doc->addScript(JUri::base() . 'media/mod_dd_gmaps_module/js/markerclusterer_compiled.min.js');
 $doc->addScript(JUri::base() . 'media/mod_dd_gmaps_module/js/dd_gmaps_module.min.js');
-$doc->addStyleSheet(JUri::base() . 'media/mod_dd_gmaps_module/css/dd_gmaps_module.min.css');
 
 require_once "modules/mod_dd_gmaps_module/inc/scriptheader.js.php";
 require_once JModuleHelper::getLayoutPath('mod_dd_gmaps_module', $params->get('layout', 'default'));
