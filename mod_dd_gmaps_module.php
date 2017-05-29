@@ -39,19 +39,19 @@ if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode'))
 $google_PlacesAPI = 'js?&libraries=places&v=3';
 
 // API key (try loading default from component)
-$google_PlacesAPI_Key = '&key=' . $params->get('google_api_key_js_places', JComponentHelper::getParams('com_dd_gmaps_locations')->get('google_api_key_js_places'));
+$google_PlacesAPI_Key = $params->get('google_api_key_js_places', JComponentHelper::getParams('com_dd_gmaps_locations')->get('google_api_key_js_places'));
 
 if (!ModDD_GMaps_Module_Helper::isset_Script($doc->_scripts, $google_PlacesAPI))
 {
 	$doc->addScript('https://maps.google.com/maps/api/' . $google_PlacesAPI . '&key=' . $google_PlacesAPI_Key);
 
-	if (    empty($google_PlacesAPI) && ModDD_GMaps_Module_Helper::existsDDGMapsLocations())
+	if (    empty($google_PlacesAPI_Key) && ModDD_GMaps_Module_Helper::existsDDGMapsLocations())
 	{
 		$app->enqueueMessage(
 			JText::_('MOD_DD_GMAPS_MODULE_API_KEY_REQUIRED_COMPONENT'), 'warning'
 		);
 	}
-	elseif (empty($google_PlacesAPI))
+	elseif (empty($google_PlacesAPI_Key))
 	{
 		$app->enqueueMessage(
 			JText::_('MOD_DD_GMAPS_MODULE_API_KEY_REQUIRED'), 'warning'
