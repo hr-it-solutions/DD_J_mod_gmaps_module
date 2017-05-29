@@ -27,7 +27,7 @@ class ModDD_GMaps_Module_Helper
 	 *
 	 * @return boolean
 	 */
-	public function existsDDGMapsLocations()
+	public static function existsDDGMapsLocations()
 	{
 		// If DD GMaps Locations
 		if (file_exists(JPATH_ADMINISTRATOR . '/components/com_dd_gmaps_locations/dd_gmaps_locations.php')
