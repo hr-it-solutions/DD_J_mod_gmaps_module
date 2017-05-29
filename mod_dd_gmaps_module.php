@@ -39,15 +39,9 @@ if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode'))
 $google_PlacesAPI = 'js?&libraries=places&v=3';
 $google_PlacesAPI_Key = '&key=' . $params->get('google_api_key_js_places', '');
 
-if (!ModDD_GMaps_Module_Helper::isset_Script($doc->_scripts, $google_PlacesAPI) && !empty($params->get('google_api_key_js_places')))
+if (!ModDD_GMaps_Module_Helper::isset_Script($doc->_scripts, $google_PlacesAPI))
 {
-	// With API key
-	$doc->addScript('https://maps.google.com/maps/api/' . $google_PlacesAPI . $google_PlacesAPI_Key);
-}
-elseif (!ModDD_GMaps_Module_Helper::isset_Script($doc->_scripts, $google_PlacesAPI))
-{
-	// Without API key
-	$doc->addScript('https://maps.google.com/maps/api/' . $google_PlacesAPI);
+	$doc->addScript('https://maps.google.com/maps/api/' . $google_PlacesAPI . '&key=' . $google_PlacesAPI_Key);
 }
 
 $doc->addScript(JUri::base() . 'media/mod_dd_gmaps_module/js/markerclusterer_compiled.min.js');
