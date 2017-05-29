@@ -27,7 +27,7 @@ class ModDD_GMaps_Module_Helper
 	 *
 	 * @return boolean
 	 */
-	public function existsDDGMapsLocations()
+	public static function existsDDGMapsLocations()
 	{
 		// If DD GMaps Locations
 		if (file_exists(JPATH_ADMINISTRATOR . '/components/com_dd_gmaps_locations/dd_gmaps_locations.php')
@@ -300,62 +300,6 @@ class ModDD_GMaps_Module_Helper
 		else
 		{
 			return JUri::base() . 'media/mod_dd_gmaps_module/img/marker_cluster.png';
-		}
-	}
-
-	/**
-	 * getLocationsView_menuItemAlias
-	 *
-	 * Try to get active view alias
-	 * If failed try to get default locations view alias
-	 *
-	 * @param   Joomla\Application\  &$app               Application
-	 * @param   boolean              $extended_location  extended location
-	 *
-	 * @return boolean|string
-	 *
-	 * @since   Version 1.1.0.6
-	 */
-	public function getLocationsView_Alias(&$app, $extended_location)
-	{
-		if ($this->existsDDGMapsLocations())
-		{
-			$activeAlias = @$app->getMenu()->getActive()->alias;
-
-			if ($activeAlias && $extended_location != true)
-			{
-				return $activeAlias;
-			}
-
-			$db = JFactory::getDbo();
-			$db_query = $db->getQuery(true);
-			$db_query->select('alias')
-				->from($db->qn('#__menu'))
-				->where(
-					$db->qn('menutype') . '= ' . $db->q('com-gmaps-locations') . ' AND ' .
-					$db->qn('link') . '= ' . $db->q('index.php?option=com_dd_gmaps_locations&view=locations') . ' AND ' .
-					$db->qn('published') . '= ' . $db->q('1')
-				);
-			$db->setQuery($db_query);
-			$menuItemAlias = $db->loadResult();
-
-			if (!$menuItemAlias)
-			{
-				$lang = JFactory::getLanguage();
-				$lang->load('com_dd_gmaps_locations', JPATH_ROOT);
-
-				JFactory::getApplication()->enqueueMessage(
-					JText::_('COM_DD_GMAPS_LOCATIONS_LOCATIONS_MENU_ITEM_REQUIRED'), 'error'
-				);
-
-				return false;
-			}
-
-			return $menuItemAlias;
-		}
-		else
-		{
-			return false;
 		}
 	}
 }
