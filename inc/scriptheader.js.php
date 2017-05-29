@@ -26,9 +26,6 @@ else
 $isDDGMapsLocationsExtended = $instance->isDDGMapsLocationsExtended();
 $items                      = $instance->getItems($extended_location, $extended_only);
 
-$sef_rewrite = JFactory::getConfig()->get('sef_rewrite');
-$alias       = $instance->getLocationsView_Alias($app, $extended_location);
-
 /**
  * Sanitize output function by Paul Phillips
  * http://stackoverflow.com/questions/6225351/how-to-minify-php-page-html-output#answer-6225706
@@ -72,9 +69,9 @@ var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?
 		{
 			$title = htmlspecialchars($item->title, ENT_QUOTES, 'UTF-8');
 		}
-		elseif ($isDDGMapsLocationsExtended || ($extended_location && $alias))
+		elseif ($isDDGMapsLocationsExtended || $extended_location)
 		{
-			$title_link = JRoute::_($sef_rewrite ? $alias . '/' . $item->alias : 'index.php?option=com_dd_gmaps_locations&view=profile&profile_id=' . $item->id);
+	        $title_link = JRoute::_('index.php?option=com_dd_gmaps_locations&view=profile&id=' . (int) $item->id . ':' . htmlspecialchars($item->alias, ENT_QUOTES, 'UTF-8'));
 			$title      = '<a href="' . $title_link . '">' . $title . '</a>';
 		}
 
