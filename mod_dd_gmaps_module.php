@@ -36,8 +36,11 @@ if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode'))
 	);
 }
 
+// Try loading API key from component
+$google_PlacesAPI_Key_from_component = JComponentHelper::getParams('com_dd_gmaps_locations')->get('google_api_key_js_places');
+
 $google_PlacesAPI = 'js?&libraries=places&v=3';
-$google_PlacesAPI_Key = '&key=' . $params->get('google_api_key_js_places', '');
+$google_PlacesAPI_Key = '&key=' . $params->get('google_api_key_js_places', $google_PlacesAPI_Key_from_component);
 
 if (!ModDD_GMaps_Module_Helper::isset_Script($doc->_scripts, $google_PlacesAPI))
 {
