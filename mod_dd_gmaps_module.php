@@ -64,11 +64,15 @@ $Places_API = 'js?&libraries=places&v=3';
 
 if (!ModDD_GMaps_Module_Helper::isset_Script($doc->_scripts, $Places_API))
 {
-	$doc->addScript('https://maps.google.com/maps/api/' . $Places_API . '&key=' . $API_Key);
+	JHTML::_('script', 'https://maps.google.com/maps/api/' . $Places_API . '&key=' . $API_Key, array('relative' => false));
 }
 
-$doc->addScript(JUri::base() . 'media/mod_dd_gmaps_module/js/markerclusterer_compiled.min.js');
-$doc->addScript(JUri::base() . 'media/mod_dd_gmaps_module/js/dd_gmaps_module.min.js');
+JHTML::_('script', 'mod_dd_gmaps_module/markerclusterer_compiled.min.js', array('version' => 'auto', 'relative' => true));
+JHTML::_('script', 'mod_dd_gmaps_module/dd_gmaps_module.min.js', array('version' => 'auto', 'relative' => true));
+
+
+// Check for a custom CSS file
+JHtml::_('stylesheet', 'mod_dd_gmaps_module/user.css', array('version' => 'auto', 'relative' => true));
 
 require_once "modules/mod_dd_gmaps_module/inc/scriptheader.js.php";
 require_once JModuleHelper::getLayoutPath('mod_dd_gmaps_module', $params->get('layout', 'default'));
