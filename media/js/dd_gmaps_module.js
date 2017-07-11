@@ -5,13 +5,6 @@
  * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
-/**
- * @package    DD_GMaps_Module
- *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
- * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
- **/
 
 ;var map;
 var markers = [];
