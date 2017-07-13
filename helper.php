@@ -78,8 +78,8 @@ class ModDD_GMaps_Module_Helper
 		elseif ($extended_location && !$extended_only)
 		{
 			$items = array_merge(
-				$this->getItem(),
-				$this->getDDGMapsLocatiosItems()
+				$this->getDDGMapsLocatiosItems(),
+				$this->getItem()
 			);
 		}
 		elseif ($this->isDDGMapsLocationsExtended() || $extended_only)
@@ -128,6 +128,7 @@ class ModDD_GMaps_Module_Helper
 		$module = JModuleHelper::getModule('mod_dd_gmaps_module');
 		$params = new JRegistry($module->params);
 
+		$return[0]->id             = 0;
 		$return[0]->category_title = 'standalone';
 		$return[0]->alias          = '';
 
