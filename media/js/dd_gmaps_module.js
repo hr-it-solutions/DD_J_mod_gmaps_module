@@ -11,12 +11,29 @@ var markers = [];
 
 var init_default_itemsJS = function () {
 
-    jQuery('.showOnMap').click(function (e) {
-
+    var showOnMap = function (e) {
         var elementID = e.target.id.replace('showID','');
         launchInfoWindow(elementID);
+    };
 
-        jQuery("html, body").animate({ scrollTop: 0 }, "slow");
+    jQuery('.showOnMap').click(function (e) {
+        showOnMap(e);
+
+        if (jQuery(this).attr('data-showonmap_action')) {
+
+            switch(jQuery(this).attr('data-showonmap_action')) {
+                case 'toid':
+                    jQuery("html, body").animate({ scrollTop: jQuery('#dd_gmaps').offset().top }, 1000);
+                    break;
+                case 'totop':
+                    jQuery("html, body").animate({ scrollTop: 0 }, "slow");
+                    break;
+                case 'tobottom':
+                    jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, "slow");
+                    break;
+            }
+        }
+
         return false;
     });
 
