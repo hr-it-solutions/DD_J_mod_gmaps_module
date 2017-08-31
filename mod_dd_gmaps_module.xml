@@ -232,6 +232,11 @@
                     <option value="0">JNO</option>
                 </field>
 
+                <fieldset addfieldpath="/modules/mod_dd_gmaps_module/fields">
+                    <field name="locationcategory" type="locationcategory" label="MOD_DD_GMAPS_MODULE_ONLY_LOCATION_CATEGORY_LABEL"
+                           description="MOD_DD_GMAPS_MODULE_ONLY_LOCATION_CATEGORY_DESC" />
+                </fieldset>
+
             </fieldset>
 
             <fieldset name="advanced">
