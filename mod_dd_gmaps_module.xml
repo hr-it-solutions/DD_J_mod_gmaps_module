@@ -237,7 +237,7 @@
                            description="MOD_DD_GMAPS_MODULE_ONLY_LOCATION_CATEGORY_DESC" />
                 </fieldset>
 
-                <field type="spacer" name="addonfeatures" label="MOD_DD_GMAPS_MODULE_ADDON_DDGMAPS_LOCATIONS_K2" />
+                <field type="spacer" name="addonfeaturesk2" label="MOD_DD_GMAPS_MODULE_ADDON_DDGMAPS_LOCATIONS_K2" />
 
             </fieldset>
 
