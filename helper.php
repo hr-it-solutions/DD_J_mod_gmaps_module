@@ -108,6 +108,21 @@ class ModDD_GMaps_Module_Helper
 
 		$db = JFactory::getDbo();
 		$query = $model->getListQuery();
+
+		$jinput = JFactory::getApplication()->input;
+
+		// Load only locationcategory items outside of com_dd_gmaps_locations view locations
+		if ($jinput->get('option') !== 'com_dd_gmaps_locations') // Important case to not break locations association
+		{
+			$module = JModuleHelper::getModule('mod_dd_gmaps_module');
+			$params = new JRegistry($module->params);
+
+			if ($params->get('locationcategory') !== 0)
+			{
+				$query->where($db->quoteName('catid') . '= ' . (int) $params->get('locationcategory'));
+			}
+		}
+
 		$db->setQuery($query);
 
 		return $db->loadObjectList();
