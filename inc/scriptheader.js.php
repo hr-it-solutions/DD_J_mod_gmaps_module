@@ -65,7 +65,7 @@ var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?
 		foreach ( $items as $i => $item ):
 		$title = htmlspecialchars($item->title, ENT_QUOTES, 'UTF-8');
 
-		if ($location_index == 0 && $params->get('extended_location') && !$params->get('only_extended_locations'))
+		if ($item->id === 0)
 		{
 			$title = htmlspecialchars($item->title, ENT_QUOTES, 'UTF-8');
 		}
