@@ -131,7 +131,9 @@
                 <fieldset addfieldpath="/modules/mod_dd_gmaps_module/fields">
                     <field name="country" type="country" label="MOD_DD_GMAPS_MODULE_COUNTRY_LABEL"
                            description="MOD_DD_GMAPS_MODULE_COUNTRY_DESC"
-                           required="true" />
+                           required="true">
+                        <option value="">MOD_DD_GMAPS_MODULE_COUNTRY_SELECT</option>
+                    </field>
                 </fieldset>
 
                 <field name="federalstate"
