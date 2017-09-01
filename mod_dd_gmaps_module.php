@@ -14,7 +14,7 @@ require_once __DIR__ . '/helper.php';
 $app = JFactory::getApplication();
 
 // Multiload prevention
-if (!isset($checkMultiload_DD_GMaps_Module))
+if (false) // todo: check wether modul has been loaded
 {
 	$app->enqueueMessage(
 		JText::_('MOD_DD_GMAPS_MODULE_WARNUNG_MODUL_EXISTS_ALREADY'), 'warning'
