@@ -60,16 +60,10 @@ var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?
     settingsZoomLevel = <?php  echo (int) $params->get('zoomlevel') ?>,
     GMapsLocations = [
 		<?php
-		$location_index = 0;
-
 		foreach ( $items as $i => $item ):
 		$title = htmlspecialchars($item->title, ENT_QUOTES, 'UTF-8');
 
-		if ($item->id === 0)
-		{
-			$title = htmlspecialchars($item->title, ENT_QUOTES, 'UTF-8');
-		}
-		elseif ($isDDGMapsLocationsExtended || $extended_location)
+		if (($isDDGMapsLocationsExtended || $extended_location) && $item->id != 0)
 		{
 	        $title_link = JRoute::_('index.php?option=com_dd_gmaps_locations&view=profile&id=' . (int) $item->id . ':' . htmlspecialchars($item->alias, ENT_QUOTES, 'UTF-8'));
 			$title      = '<a href="' . $title_link . '">' . $title . '</a>';
@@ -103,7 +97,6 @@ var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?
             },
             content: '<?php echo '<span class="info-content">' . $title . '<br>' . htmlspecialchars($item->street, ENT_QUOTES, 'UTF-8') . '<br>' . htmlspecialchars($item->location, ENT_QUOTES, 'UTF-8') . '</span>'; ?>'
         },<?php
-		$location_index = $i;
 		endforeach; ?>
     ];
 <?php // Initialize Map ?>
@@ -123,7 +116,7 @@ if ($input->get("geolocate", "STRING") == "locate")
 	echo "launchLocateInfoWindow($lat,$lng,'$content',$zoom,'$markertitle','$markericon');";
 }
 
-if ($input->get('profile_id') != 0 || $location_index == 0)
+if ($input->get('profile_id') != 0)
 {
 	echo 'setTimeout(function(){
             var profileObj = jQuery.grep(GMapsLocations, function(e){ return e.id == ' . $input->get('profile_id', 0) . '; });
