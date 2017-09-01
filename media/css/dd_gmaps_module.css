@@ -40,10 +40,11 @@
     top: 0;
     height: 100% !important;
     width: 100% !important;
+    z-index: 999;
 }
 #dd_gmaps_fullsize.fullsize {
     position: absolute;
     right: 4px;
     top: 4px;
-    z-index: 999;
+    z-index: 9999;
 }
