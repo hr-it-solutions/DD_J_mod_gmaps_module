@@ -109,12 +109,12 @@ class ModDD_GMaps_Module_Helper
 
 		$jinput = JFactory::getApplication()->input;
 
+		$module = JModuleHelper::getModule('mod_dd_gmaps_module');
+		$params = new JRegistry($module->params);
+
 		// Load only locationcategory items outside of com_dd_gmaps_locations view locations
 		if ($jinput->get('option') !== 'com_dd_gmaps_locations') // Important case to not break locations association
 		{
-			$module = JModuleHelper::getModule('mod_dd_gmaps_module');
-			$params = new JRegistry($module->params);
-
 			if ($params->get('locationcategory') !== 0)
 			{
 				$query->where($db->quoteName('catid') . '= ' . (int) $params->get('locationcategory'));
@@ -123,7 +123,27 @@ class ModDD_GMaps_Module_Helper
 
 		$db->setQuery($query);
 
-		return $db->loadObjectList();
+		$results = $db->loadObjectList();
+
+		// Extc Plugins
+		if ($params->get('extcplugins') !== '0')
+		{
+			// Get param, expected 'com_k2' etc...
+			$extc_plugin = $params->get('extcplugins');
+
+			JPluginHelper::importPlugin('dd_gmaps_locations');
+			$dispatcher = JEventDispatcher::getInstance();
+			$plg_results = $dispatcher->trigger('onextc', array(&$results, &$extc_plugin))[0];
+
+			if (!empty($plg_results))
+			{
+				// Prepear plg_results in loop
+				$results = $plg_results;
+			}
+		}
+
+		return $results;
+
 	}
 
 	/**

@@ -65,7 +65,16 @@ var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?
 
 		if (($isDDGMapsLocationsExtended || $extended_location) && $item->id != 0)
 		{
-	        $title_link = JRoute::_('index.php?option=com_dd_gmaps_locations&view=profile&id=' . (int) $item->id . ':' . htmlspecialchars($item->alias, ENT_QUOTES, 'UTF-8'));
+			if (isset($item->ext_c_id) && $item->ext_c_id !== '0' && isset($item->extc_link))
+			{
+				// Ext C 3rd Party Links
+				$title_link = JRoute::_($item->extc_link);
+			}
+			else
+			{
+				$title_link = JRoute::_('index.php?option=com_dd_gmaps_locations&view=profile&id=' . (int) $item->id . ':' . htmlspecialchars($item->alias, ENT_QUOTES, 'UTF-8'));
+			}
+
 			$title      = '<a href="' . $title_link . '">' . $title . '</a>';
 		}
 
