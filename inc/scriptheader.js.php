@@ -60,18 +60,21 @@ var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?
     settingsZoomLevel = <?php  echo (int) $params->get('zoomlevel') ?>,
     GMapsLocations = [
 		<?php
-		$location_index = 0;
-
 		foreach ( $items as $i => $item ):
 		$title = htmlspecialchars($item->title, ENT_QUOTES, 'UTF-8');
 
-		if ($location_index == 0 && $params->get('extended_location') && !$params->get('only_extended_locations'))
+		if (($isDDGMapsLocationsExtended || $extended_location) && $item->id != 0)
 		{
-			$title = htmlspecialchars($item->title, ENT_QUOTES, 'UTF-8');
-		}
-		elseif ($isDDGMapsLocationsExtended || $extended_location)
-		{
-	        $title_link = JRoute::_('index.php?option=com_dd_gmaps_locations&view=profile&id=' . (int) $item->id . ':' . htmlspecialchars($item->alias, ENT_QUOTES, 'UTF-8'));
+			if (isset($item->ext_c_id) && $item->ext_c_id !== '0' && isset($item->extc_link))
+			{
+				// Ext C 3rd Party Links
+				$title_link = JRoute::_($item->extc_link);
+			}
+			else
+			{
+				$title_link = JRoute::_('index.php?option=com_dd_gmaps_locations&view=profile&id=' . (int) $item->id . ':' . htmlspecialchars($item->alias, ENT_QUOTES, 'UTF-8'));
+			}
+
 			$title      = '<a href="' . $title_link . '">' . $title . '</a>';
 		}
 
@@ -103,7 +106,6 @@ var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?
             },
             content: '<?php echo '<span class="info-content">' . $title . '<br>' . htmlspecialchars($item->street, ENT_QUOTES, 'UTF-8') . '<br>' . htmlspecialchars($item->location, ENT_QUOTES, 'UTF-8') . '</span>'; ?>'
         },<?php
-		$location_index = $i;
 		endforeach; ?>
     ];
 <?php // Initialize Map ?>
@@ -123,7 +125,7 @@ if ($input->get("geolocate", "STRING") == "locate")
 	echo "launchLocateInfoWindow($lat,$lng,'$content',$zoom,'$markertitle','$markericon');";
 }
 
-if ($input->get('profile_id') != 0 || $location_index == 0)
+if ($input->get('profile_id') != 0)
 {
 	echo 'setTimeout(function(){
             var profileObj = jQuery.grep(GMapsLocations, function(e){ return e.id == ' . $input->get('profile_id', 0) . '; });

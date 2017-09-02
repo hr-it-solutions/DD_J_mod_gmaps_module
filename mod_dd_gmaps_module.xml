@@ -6,7 +6,7 @@
     <authorUrl>https://www.hr-it-solutions.com</authorUrl>
     <copyright>Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions</copyright>
     <license>GNU/GPLv2 only</license>
-    <version>1.1.1.3</version>
+    <version>1.1.1.4</version>
     <description>MOD_DD_GMAPS_MODULE_XML_DESCRIPTION</description>
 
     <files>
@@ -131,7 +131,9 @@
                 <fieldset addfieldpath="/modules/mod_dd_gmaps_module/fields">
                     <field name="country" type="country" label="MOD_DD_GMAPS_MODULE_COUNTRY_LABEL"
                            description="MOD_DD_GMAPS_MODULE_COUNTRY_DESC"
-                           required="true" />
+                           required="true">
+                        <option value="">MOD_DD_GMAPS_MODULE_COUNTRY_SELECT</option>
+                    </field>
                 </fieldset>
 
                 <field name="federalstate"
@@ -236,6 +238,15 @@
                     <field name="locationcategory" type="locationcategory" label="MOD_DD_GMAPS_MODULE_ONLY_LOCATION_CATEGORY_LABEL"
                            description="MOD_DD_GMAPS_MODULE_ONLY_LOCATION_CATEGORY_DESC" />
                 </fieldset>
+
+                <field type="spacer" name="addonfeatures_extcid" label="MOD_DD_GMAPS_MODULE_ADDON_DDGMAPS_LOCATIONS_EXTCID" />
+
+                <fieldset addfieldpath="/modules/mod_dd_gmaps_module/fields">
+                    <field name="extcplugins" type="extcplugins" label="MOD_DD_GMAPS_MODULE_ONLY_LOCATION_EXTCID_LABEL"
+                           description="MOD_DD_GMAPS_MODULE_ONLY_LOCATION_EXTCID_DESC" />
+                </fieldset>
+
+                <field type="spacer" name="addonfeatures_extcid_note" label="MOD_DD_GMAPS_MODULE_ADDON_DDGMAPS_LOCATIONS_EXTCID_NOTE" />
 
             </fieldset>
 

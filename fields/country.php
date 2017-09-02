@@ -44,21 +44,11 @@ class JFormFieldCountry extends JFormFieldList {
 			$countries = $obj->extension->countries->country;
 		}
 
-		// Default field
-		$options[0] = new StdClass;
-		$options[0]->value = 0;
-		$options[0]->text  = JText::_('MOD_DD_GMAPS_MODULE_COUNTRY_SELECT');
-
-		$i = 1;
-
 		foreach ($countries as $country)
 		{
-			$options[$i] = new StdClass;
-			$options[$i]->value = 'MOD_DD_GMAPS_MODULE_COUNTRY_NAME_' . $country->name;
-			$options[$i]->text  = JText::_('MOD_DD_GMAPS_MODULE_COUNTRY_NAME_' . $country->name);
-			++$i;
+			$options[] = JHtml::_('select.option', 'MOD_DD_GMAPS_MODULE_COUNTRY_NAME_' . $country->name, JText::_('MOD_DD_GMAPS_MODULE_COUNTRY_NAME_' . $country->name));
 		}
 
-		return $options;
+		return array_merge(parent::getOptions(), $options);
 	}
 }
