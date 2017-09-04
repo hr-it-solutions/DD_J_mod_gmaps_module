@@ -161,6 +161,33 @@
                        description="MOD_DD_GMAPS_MODULE_LONGITUDE_DESC"
                 />
 
+                <field type="spacer" name="geohardcode_spacer" label="MOD_DD_GMAPS_MODULE_GEOHARDCODE" />
+
+                <field
+                        name="geohardcode"
+                        type="radio"
+                        default="0"
+                        label="MOD_DD_GMAPS_MODULE_GEOHARDCODE_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_GEOHARDCODE_DESC"
+                        class="btn-group btn-group-yesno">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="latitude_hardcode"
+                       type="text"
+                       default="auto"
+                       label="MOD_DD_GMAPS_MODULE_LATITUDE_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_LATITUDE_DESC"
+                />
+
+                <field name="longitude_hardcode"
+                       type="text"
+                       default="auto"
+                       label="MOD_DD_GMAPS_MODULE_LONGITUDE_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_LONGITUDE_DESC"
+                />
+
             </fieldset>
             <!-- Google API Settings -->
             <fieldset name="google_api_settings"
