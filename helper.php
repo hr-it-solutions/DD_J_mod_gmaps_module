@@ -18,6 +18,20 @@ class ModDD_GMaps_Module_Helper
 {
 	protected $params;
 
+	protected static $loaded = null;
+
+	public static function isloaded()
+	{
+		if (is_null(self::$loaded))
+		{
+			self::$loaded = true;
+
+			return false;
+		}
+
+		return true;
+	}
+
 	/**
 	 * existsDDGMapsLocations
 	 *
