@@ -190,9 +190,30 @@ class ModDD_GMaps_Module_Helper
 		$return[0]->latitude       = $params->get('latitude', '48.0000000');
 		$return[0]->longitude      = $params->get('longitude', '2.0000000');
 
-		// If geoCode plugin is not enabled, geCode addresses on the fly without saving!
-		if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode'))
+		// Try to get geoCode HardCoding
+		if (($params->get('geohardcode') !== '0'))
 		{
+			if ($this->validateLatLong($params->get('latitude_hardcode'), $params->get('longitude_hardcode')))
+			{
+				$return[0]->latitude       = $params->get('latitude_hardcode');
+				$return[0]->longitude      = $params->get('longitude_hardcode');
+			}
+			else
+			{
+				JFactory::getApplication()->enqueueMessage(
+					JText::_('MOD_DD_GMAPS_MODULE_API_ALERT_GEOLOCATION_FAILED_ZERO_RESULTS_HARDCODE'),
+					'warning'
+				);
+				goto fallbackGeoCode;
+			}
+		}
+
+		// If geoCode plugin is not enabled and geoCode HardCoding ist not enabled,
+		// geCode addresses on the fly without saving!
+		if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode')
+			&& $params->get('geohardcode') !== '1' )
+		{
+			fallbackGeoCode:
 			// Get latitude and longitude
 			$latlng = $this->Geocode_Location_To_LatLng($return, $params->get('google_api_key_geocode'));
 			$return[0]->latitude   = $latlng['latitude'];
@@ -200,6 +221,22 @@ class ModDD_GMaps_Module_Helper
 		}
 
 		return $return;
+	}
+
+	/**
+	 * Validates coordinate
+	 * Adapted from https://gist.github.com/arubacao/b5683b1dab4e4a47ee18fd55d9efbdd1
+	 *
+	 * @param   float  $lat   Latitude
+	 * @param   float  $long  Longitude
+	 *
+	 * @return  bool `true` if the coordinate is valid, `false` if not
+	 */
+	private function validateLatLong($lat, $long)
+	{
+		$latlong = preg_replace("/[^0-9,.]/", "", $lat . ',' . $long);
+
+		return preg_match('/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?),[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/', $latlong);
 	}
 
 	/**
@@ -301,12 +338,18 @@ class ModDD_GMaps_Module_Helper
 	{
 		if ($params->get('set_as_default_position'))
 		{
+			if (($params->get('geohardcode') !== '0'))
+			{
+				if ($this->validateLatLong($params->get('latitude_hardcode'), $params->get('longitude_hardcode')))
+				{
+					return (float) $params->get('latitude_hardcode') . ', ' . (float) $params->get('longitude_hardcode');
+				}
+			}
+
 			return (float) $params->get('latitude') . ', ' . (float) $params->get('longitude');
 		}
-		else
-		{
-			return '48.0000000, 2.0000000';
-		}
+
+		return '48.0000000, 2.0000000';
 	}
 
 	/**
