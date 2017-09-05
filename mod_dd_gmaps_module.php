@@ -9,19 +9,9 @@
 
 defined('_JEXEC') or die;
 
-require_once __DIR__ . '/helper.php';
+JLoader::register('ModDD_GMaps_Module_Helper', __DIR__ . '/helper.php');
 
 $app = JFactory::getApplication();
-
-// Multiload prevention todo J3.8
-if (false)
-{
-	$app->enqueueMessage(
-		JText::_('MOD_DD_GMAPS_MODULE_WARNUNG_MODUL_EXISTS_ALREADY'), 'warning'
-	);
-
-	return false;
-}
 
 // Include the functions only once
 JLoader::register('ModDD_GMaps_Module_Helper', __DIR__ . '/helper.php');
