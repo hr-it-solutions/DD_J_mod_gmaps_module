@@ -13,8 +13,8 @@ require_once __DIR__ . '/helper.php';
 
 $app = JFactory::getApplication();
 
-// Multiload prevention
-if (!isset($checkMultiload_DD_GMaps_Module))
+// Multiload prevention todo J3.8
+if (false)
 {
 	$app->enqueueMessage(
 		JText::_('MOD_DD_GMAPS_MODULE_WARNUNG_MODUL_EXISTS_ALREADY'), 'warning'
@@ -22,8 +22,6 @@ if (!isset($checkMultiload_DD_GMaps_Module))
 
 	return false;
 }
-
-$doc = JFactory::getDocument();
 
 // Include the functions only once
 JLoader::register('ModDD_GMaps_Module_Helper', __DIR__ . '/helper.php');
@@ -61,6 +59,8 @@ else
 }
 
 $Places_API = 'js?&libraries=places&v=3';
+
+$doc = JFactory::getDocument();
 
 if (!ModDD_GMaps_Module_Helper::isset_Script($doc->_scripts, $Places_API))
 {
