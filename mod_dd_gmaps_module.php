@@ -13,8 +13,15 @@ JLoader::register('ModDD_GMaps_Module_Helper', __DIR__ . '/helper.php');
 
 $app = JFactory::getApplication();
 
-// Include the functions only once
-JLoader::register('ModDD_GMaps_Module_Helper', __DIR__ . '/helper.php');
+// Multiload prevention todo J3.8
+if (false)
+{
+	$app->enqueueMessage(
+		JText::_('MOD_DD_GMAPS_MODULE_WARNUNG_MODUL_EXISTS_ALREADY'), 'warning'
+	);
+
+	return false;
+}
 
 // Check if plugin geocode is enabled
 if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode'))
