@@ -12,6 +12,12 @@
     width: 100%;
     min-height: 320px;
 }
+
+#dd_gmaps img {
+    width: auto !important;
+    max-width: none !important;
+}
+
 #dd_gmaps > div {
     height: 100% !important;
     width: 100% !important;
