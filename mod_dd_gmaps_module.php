@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die;
 
-require_once __DIR__ . '/helper.php';
+JLoader::register('ModDD_GMaps_Module_Helper', __DIR__ . '/helper.php');
 
 $app = JFactory::getApplication();
 
@@ -22,9 +22,6 @@ if (false)
 
 	return false;
 }
-
-// Include the functions only once
-JLoader::register('ModDD_GMaps_Module_Helper', __DIR__ . '/helper.php');
 
 // Check if plugin geocode is enabled
 if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode'))
