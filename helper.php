@@ -171,6 +171,7 @@ class ModDD_GMaps_Module_Helper
 		$return[0]->location       = $params->get('location', '');
 		$return[0]->zip            = $params->get('zip', '');
 		$return[0]->country        = $params->get('country', '');
+		$return[0]->federalstate   = $params->get('federalstate', '');
 
 		// Try to get geoCode address parameter > geoCoded via dd_gmaps_locations_geocode plugin or default value
 		$return[0]->latitude       = $params->get('latitude', '48.0000000');
