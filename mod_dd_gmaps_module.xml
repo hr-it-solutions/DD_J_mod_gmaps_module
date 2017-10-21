@@ -189,6 +189,7 @@
                 />
 
             </fieldset>
+
             <!-- Google API Settings -->
             <fieldset name="google_api_settings"
                       label="MOD_DD_GMAPS_MODULE_API_SETTINGS_LABEL"
@@ -205,6 +206,43 @@
                        type="text"
                        label="MOD_DD_GMAPS_MODULE_API_KEY_GEOCODE_LABEL"
                        description="MOD_DD_GMAPS_MODULE_API_KEY_GEOCODE_DESC"
+                />
+
+            </fieldset>
+
+            <!-- InfoWindow -->
+            <fieldset name="infowindow"
+                      label="MOD_DD_GMAPS_MODULE_INFOWINDOW_SETTINGS_LABEL"
+                      description="MOD_DD_GMAPS_MODULE_INFOWINDOW_SETTINGS_DESC"
+            >
+
+                <field
+                        name="infowindow_opendefault"
+                        type="radio"
+                        default="0"
+                        label="MOD_DD_GMAPS_MODULE_INFOWINDOW_OPEN_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_INFOWINDOW_OPEN_DESC"
+                        class="btn-group btn-group-yesno">
+                    <option value="1">MOD_DD_GMAPS_MODULE_INFOWINDOW_OPEN_AUTOSHOW</option>
+                    <option value="0">MOD_DD_GMAPS_MODULE_INFOWINDOW_OPEN_ONCLICK</option>
+                </field>
+
+                <field
+                        name="infowindow_defaultaddress"
+                        type="radio"
+                        default="1"
+                        label="MOD_DD_GMAPS_MODULE_INFOWINDOW_DEFAULTADDRESS_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_INFOWINDOW_DEFAULTADDRESS_DESC"
+                        class="btn-group btn-group-yesno">
+                    <option value="1">JSHOW</option>
+                    <option value="0">JHIDE</option>
+                </field>
+
+                <field name="infowindow_content"
+                       type="editor"
+                       label="MOD_DD_GMAPS_MODULE_INFOWINDOW_CONTENT_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_INFOWINDOW_CONTENT_DESC"
+                       idth="300" filter="safehtml" />
                 />
 
             </fieldset>
