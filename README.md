@@ -17,6 +17,12 @@
 - Profile pages liked to the map (markers and info boxes)
 - Extends list layout to display multiple locations
 
+##### Addon Features for 3rd Party extensions - Ect C Connector
+- Connect any extension like (com_content, com_k2, com_seblod etc..) or any custom extensin which follows the Joomla routing system.
+
+**Note:** This requires the DD GMaps Locations Component and a DD_GMaps_Locations_ext_c System Plugin for the extension to connect. Ext C Plugins can be available at our github account for some 3rd party extensions we have already connected or if not available, a plugin for your extension can be mostly provided on paid request.  <br>
+**Note:** 3rd Party connect is BETA and experimental, we can just provide the plugins (Suggested for developers), support on paid request via https://www.hr-it-solutions.com/en/contact
+
 **and much more...**
 
 Errors and technical modification subject to change.

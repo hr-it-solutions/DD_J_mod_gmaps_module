@@ -26,9 +26,6 @@ class JFormFieldExtCPlugins extends JFormFieldList {
 	 */
 	public function getOptions()
 	{
-		$categories = JCategories::getInstance('DD_GMaps_Locations');
-		$subCategories = $categories->get()->getChildren(true);
-
 		// Default field
 		$options[0] = new StdClass;
 		$options[0]->value = 0;
@@ -45,10 +42,25 @@ class JFormFieldExtCPlugins extends JFormFieldList {
 		$db->setQuery($query);
 		$rows = $db->loadObjectList();
 
-		foreach( $rows as $row ) {
+		foreach($rows as $row)
+		{
 			$options[$i]        = new StdClass;
-			$options[$i]->value = 'com_' . trim($row->element, 'dd_ext_c_');
-			$options[$i]->text  = strtoupper(trim($row->element, 'dd_ext_c_')) . ' Component';
+
+			switch ($row->element)
+			{
+				case 'dd_ext_c_content':
+					$options[$i]->value = 'com_' . 'content';
+					$options[$i]->text  = 'Content Component';
+					break;
+				case 'dd_ext_c_k2':
+					$options[$i]->value = 'com_' . 'k2';
+					$options[$i]->text  = 'K2 Component';
+					break;
+				default:
+					$options[$i]->value = 'com_' . trim($row->element, 'dd_ext_c_');
+					$options[$i]->text  = ucfirst(trim($row->element, 'dd_ext_c_')) . ' Component';
+			}
+
 			++$i;
 		}
 
