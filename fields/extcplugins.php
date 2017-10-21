@@ -26,9 +26,6 @@ class JFormFieldExtCPlugins extends JFormFieldList {
 	 */
 	public function getOptions()
 	{
-		$categories = JCategories::getInstance('DD_GMaps_Locations');
-		$subCategories = $categories->get()->getChildren(true);
-
 		// Default field
 		$options[0] = new StdClass;
 		$options[0]->value = 0;
