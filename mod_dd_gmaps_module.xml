@@ -162,6 +162,18 @@
                 />
 
                 <field type="spacer" name="geohardcode_spacer" label="MOD_DD_GMAPS_MODULE_GEOHARDCODE" />
+                <field type="spacer" name="geohardcode_script" label="
+                       &lt;script  type='text/javascript'&gt;
+                               jQuery(function(){
+                                    var t='⚑ GEOHardCoding', p='#jform_params_';
+                                    jQuery(p+'geohardcode').first().find('label').on('click', function(){
+                                        jQuery(p+'street').val(t);
+                                        jQuery(p+'location').val(t);
+                                        jQuery(p+'zip').val(t);
+                                        jQuery(p+'federalstate').val(t);
+                                        jQuery(p+'infowindow_defaultaddress').last().find('label').click(); }); });
+                       &lt;/script&gt;"
+                /><!-- GeoHardCode Script -->
 
                 <field
                         name="geohardcode"
