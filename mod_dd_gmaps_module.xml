@@ -162,18 +162,6 @@
                 />
 
                 <field type="spacer" name="geohardcode_spacer" label="MOD_DD_GMAPS_MODULE_GEOHARDCODE" />
-                <field type="spacer" name="geohardcode_script" label="
-                       &lt;script  type='text/javascript'&gt;
-                               jQuery(function(){
-                                    var t='⚑ GEOHardCoding', p='#jform_params_';
-                                    jQuery(p+'geohardcode').first().find('label').on('click', function(){
-                                        jQuery(p+'street').val(t);
-                                        jQuery(p+'location').val(t);
-                                        jQuery(p+'zip').val(t);
-                                        jQuery(p+'federalstate').val(t);
-                                        jQuery(p+'infowindow_defaultaddress').last().find('label').click(); }); });
-                       &lt;/script&gt;"
-                /><!-- GeoHardCode Script -->
 
                 <field
                         name="geohardcode"
@@ -199,6 +187,23 @@
                        label="MOD_DD_GMAPS_MODULE_LONGITUDE_LABEL"
                        description="MOD_DD_GMAPS_MODULE_LONGITUDE_DESC"
                 />
+
+                <field type="spacer" name="geohardcode_script"
+                       label="&lt;a
+                            href='javascript:void(0)'
+                            class='btn btn-danger'
+                            id='geoaddressclear'&gt;⚑ Unset required address fields
+                       &lt;/a&gt;
+                       &lt;script  type='text/javascript'&gt;
+                            jQuery(function(){ var t='⚑', p='#jform_params_';
+                                jQuery('#geoaddressclear').on('click', function(){
+                                    jQuery(p+'street').val(t);
+                                    jQuery(p+'location').val(t);
+                                    jQuery(p+'zip').val(t);
+                                });
+                           });
+                       &lt;/script&gt;"
+                /><!-- GeoHardCode Script -->
 
             </fieldset>
 
