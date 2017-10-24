@@ -189,7 +189,7 @@
                 />
 
                 <fieldset addfieldpath="/modules/mod_dd_gmaps_module/fields">
-                    <field name="geohardcodescript" type="geohardcodescript" label="true" />
+                    <field name="geohardcodescript" type="geohardcodescript" label="MOD_DD_GMAPS_MODULE_GEOHARDCODE_UNSET" />
                     <!-- GeoHardCode Script -->
                 </fieldset>
 

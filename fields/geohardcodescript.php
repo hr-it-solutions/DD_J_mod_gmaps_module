@@ -25,9 +25,12 @@ class JFormFieldGeoHardcodeScript extends JFormFieldSpacer {
 		$html = array();
 		$flag = '⚑';
 
-		$label_text = $flag . ' ' . JText::_('MOD_DD_GMAPS_MODULE_GEOHARDCODE_UNSET');
+		// Get the label text from the XML element, defaulting to the element name.
+		$text = $this->element['label'] ? (string) $this->element['label'] : (string) $this->element['name'];
+		$text = $this->translateLabel ? JText::_($text) : $text;
+		$text = $flag . ' ' . $text;
 
-		$html[] = "<a href='javascript:void(0)' class='btn btn-danger' id='geoaddressclear'>$label_text</a>";
+		$html[] = "<a href='javascript:void(0)' class='btn btn-danger' id='geoaddressclear'>$text</a>";
 
 		$html[] = '<script type=\'text/javascript\'>';
 			$html[] = 'jQuery(function(){ ';
@@ -37,6 +40,7 @@ class JFormFieldGeoHardcodeScript extends JFormFieldSpacer {
 					$html[] = 'jQuery(p+\'street\').val(t);';
 					$html[] = 'jQuery(p+\'location\').val(t);';
 					$html[] = 'jQuery(p+\'zip\').val(t);';
+					$html[] = 'jQuery(p+\'geohardcode\').find("[for=jform_params_geohardcode0]").click();';
 				$html[] = '});';
 			$html[] = '});';
 		$html[] = '</script><!-- GeoHardCode Script -->';
