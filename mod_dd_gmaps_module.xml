@@ -188,22 +188,10 @@
                        description="MOD_DD_GMAPS_MODULE_LONGITUDE_DESC"
                 />
 
-                <field type="spacer" name="geohardcode_script"
-                       label="&lt;a
-                            href='javascript:void(0)'
-                            class='btn btn-danger'
-                            id='geoaddressclear'&gt;⚑ Unset required address fields
-                       &lt;/a&gt;
-                       &lt;script  type='text/javascript'&gt;
-                            jQuery(function(){ var t='⚑', p='#jform_params_';
-                                jQuery('#geoaddressclear').on('click', function(){
-                                    jQuery(p+'street').val(t);
-                                    jQuery(p+'location').val(t);
-                                    jQuery(p+'zip').val(t);
-                                });
-                           });
-                       &lt;/script&gt;"
-                /><!-- GeoHardCode Script -->
+                <fieldset addfieldpath="/modules/mod_dd_gmaps_module/fields">
+                    <field name="geohardcodescript" type="geohardcodescript" label="true" />
+                    <!-- GeoHardCode Script -->
+                </fieldset>
 
             </fieldset>
 
