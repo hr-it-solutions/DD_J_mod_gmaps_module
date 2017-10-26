@@ -115,7 +115,7 @@ class ModDD_GMaps_Module_Helper
 		// Load only locationcategory items outside of com_dd_gmaps_locations view locations
 		if ($jinput->get('option') !== 'com_dd_gmaps_locations') // Important case to not break locations association
 		{
-			if ($params->get('locationcategory') !== 0)
+			if ($params->get('locationcategory') !== "0")
 			{
 				$query->where($db->quoteName('catid') . '= ' . (int) $params->get('locationcategory'));
 			}
