@@ -114,6 +114,13 @@ function launchInfoWindow(i) {
             infowindow.setContent(GMapsLocations[i].content);
             infowindow.open(map, marker);
 
+            // Add addListener to allow onclick infoWindows
+            google.maps.event.addListener(marker, 'mousedown', (function(marker) {
+                return function() {
+                    infowindow.open(map, marker);
+                }
+            })(marker));
+
         }
         else
         {
@@ -155,8 +162,22 @@ function launchLocateInfoWindow(lat,lng,content,zoom,markertitle,merkericon) {
 }
 
 function toggleFullSize() {
+
     jQuery('#dd_gmaps_fullsize').toggleClass('fullsize btn-alert');
-    jQuery('.fullsize-btn').toggleClass('btn-danger');
+
+    var FullSizeButton = jQuery('.fullsize-btn');
+
+    if(FullSizeButton.html() === Joomla.JText._('MOD_DD_GMAPS_MODULE_FULLSIZE'))
+    {
+        FullSizeButton.html(Joomla.JText._('MOD_DD_GMAPS_MODULE_FULLSIZE_CLOSE'))
+    }
+    else
+    {
+        FullSizeButton.html(Joomla.JText._('MOD_DD_GMAPS_MODULE_FULLSIZE'))
+    }
+
+    FullSizeButton.toggleClass('btn-danger');
+
     jQuery('#dd_gmaps').toggleClass('fullsize');
     google.maps.event.trigger(map, "resize");
 }
