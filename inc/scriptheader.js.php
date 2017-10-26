@@ -9,6 +9,10 @@
 
 defined('_JEXEC') or die();
 
+JText::script('MOD_DD_GMAPS_MODULE');
+JText::script('MOD_DD_GMAPS_MODULE_FULLSIZE');
+JText::script('MOD_DD_GMAPS_MODULE_FULLSIZE_CLOSE');
+
 $app      = JFactory::getApplication();
 $instance = new ModDD_GMaps_Module_Helper;
 $input    = $app->input;
@@ -207,7 +211,7 @@ var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?
             lat:<?php echo $item->latitude; ?>,
             lng:<?php echo $item->longitude; ?>,
             icon: {
-                url: "<?php echo $icon; ?>",
+                url: '<?php echo $icon; ?>',
                 /* This marker is 22 pixels wide by 32 pixels high. */
                 size: new google.maps.Size(22, <?php echo $height; ?>),
                 /* The origin for this image is (0, 0). */
@@ -230,12 +234,14 @@ google.maps.event.addDomListener(window, 'load', initialize);
 // Info windows
 
 // Geolocate info window launcher
-if ($input->get("geolocate", "STRING") == "locate")
+if ($input->get('geolocate', 'STRING') == 'locate')
 {
-	$locationLatLng = explode(",", $input->get("locationLatLng", "", "STRING"));
+	$locationLatLng = explode(',', $input->get('locationLatLng', '', 'STRING'));
 	$lat            = substr($locationLatLng[0], 0, 10);
 	$lng            = substr($locationLatLng[1], 0, 10);
-	$content        = "<h2>" . JText::_('MOD_DD_GMAPS_MODULE_YOUR_LOCATION') . "</h2><b>" . JText::_('MOD_DD_GMAPS_MODULE_YOUR_LATITUDE') . ":</b> $lat<br><b>" . JText::_('MOD_DD_GMAPS_MODULE_YOUR_LONGITUDE') . ":</b> $lng";
+	$content        = '<h2>' . JText::_('MOD_DD_GMAPS_MODULE_YOUR_LOCATION') . '</h2><b>' .
+                        JText::_('MOD_DD_GMAPS_MODULE_YOUR_LATITUDE') . ':</b> ' . $lat . '<br><b>' .
+                        JText::_('MOD_DD_GMAPS_MODULE_YOUR_LONGITUDE') . ':</b> ' . $lng;
 	$zoom           = 9;
 	$markertitle    = JText::_('MOD_DD_GMAPS_MODULE_YOUR_LOCATION');
 	$markericon     = JUri::base() . 'media/mod_dd_gmaps_module/img/marker_position.png';
