@@ -101,12 +101,13 @@ var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?
                 $size      = getimagesize($imagefile);
 
                 // Calculate height based on image width
-                $height = round($size[1] / $size[0] * 30);
+                // height / width * width-gmaps-icon default sice
+                $height = round($size[1] / $size[0] * 22);
             }
             else
             {
                 $icon = $instance->paramMarkerImage($params);
-                $height = 42;
+                $height = 32;
             }
         }
 
@@ -207,9 +208,13 @@ var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?
             lng:<?php echo $item->longitude; ?>,
             icon: {
                 url: "<?php echo $icon; ?>",
-                scaledSize: new google.maps.Size(30, <?php echo $height; ?>),
+                /* This marker is 22 pixels wide by 32 pixels high. */
+                size: new google.maps.Size(22, <?php echo $height; ?>),
+                /* The origin for this image is (0, 0). */
                 origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(0, 0)
+                /* The anchor for this image is the base of the img arrow at (11px (width / 2) is center bottom pointer and $height). */
+                scaledSize: new google.maps.Size(22, <?php echo $height; ?>),
+                anchor: new google.maps.Point(11, <?php echo $height; ?>)
             },
             content: '<?php echo $infoContent; ?>'
         },<?php
