@@ -233,6 +233,17 @@
                 </field>
 
                 <field
+                        name="zoomlevel_infowindow"
+                        type="integer"
+                        first="1"
+                        last="20"
+                        step="1"
+                        default="4"
+                        label="MOD_DD_GMAPS_MODULE_ZOOMLEVEL_INFOWINDOW_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_ZOOMLEVEL_INFOWINDOW_DESC"
+                />
+
+                <field
                         name="infowindow_defaultaddress"
                         type="radio"
                         default="1"
