@@ -88,8 +88,10 @@ jQuery(document).ready(function () {
 });
 
 var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?>),
+
     settingsClusterIcon = '<?php echo $instance->paramClusterMarkerImage($params); ?>',
-    settingsZoomLevel = <?php  echo (int) $params->get('zoomlevel') ?>,
+    settingsZoomLevel   = <?php echo (int) $params->get('zoomlevel', 4); ?>,
+    ZoomLevelInfoWindow = <?php echo (int) $params->get('zoomlevel_infowindow', 9); ?>,
 
     <?php // Build - Locations array ?>
     GMapsLocations = [
@@ -105,7 +107,6 @@ var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?
                 $size      = getimagesize($imagefile);
 
                 // Calculate height based on image width
-                // height / width * width-gmaps-icon default sice
                 $height = round($size[1] / $size[0] * 22);
             }
             else
@@ -145,26 +146,21 @@ var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?
 		        // Collect and prepare address contents
 		        $addresses = [];
 
-		        if (DDNotEmptyFlag($item->street))
-		        {
+		        if (DDNotEmptyFlag($item->street)) {
 			        $addresses[] = $item->street;
 		        }
 
-		        if (DDNotEmptyFlag($item->zip) && DDNotEmptyFlag($item->location))
-		        {
+		        if (DDNotEmptyFlag($item->zip) && DDNotEmptyFlag($item->location)) {
 			        $addresses[] = $item->zip . ' ' . $item->location;
 		        }
-                elseif (DDNotEmptyFlag($item->zip))
-		        {
+                elseif (DDNotEmptyFlag($item->zip)) {
 			        $addresses[] = $item->zip;
 		        }
-                elseif (DDNotEmptyFlag($item->location))
-		        {
+                elseif (DDNotEmptyFlag($item->location)) {
 			        $addresses[] = $item->location;
 		        }
 
-		        if (DDNotEmptyFlag($item->federalstate))
-		        {
+		        if (DDNotEmptyFlag($item->federalstate)) {
 			        $addresses[] = $item->federalstate;
 		        }
 	        }
@@ -189,8 +185,7 @@ var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?
             }
             else
             {
-	            if (DDNotEmptyFlag($title))
-	            {
+	            if (DDNotEmptyFlag($title)) {
 		            $infoContent .= $title;
 	            }
             }
@@ -231,7 +226,7 @@ var infowindow = new google.maps.InfoWindow();
 google.maps.event.addDomListener(window, 'load', initialize);
 
 <?php
-// Info windows
+// Info Windows
 
 // Geolocate info window launcher
 if ($input->get('geolocate', 'STRING') == 'locate')
@@ -242,10 +237,9 @@ if ($input->get('geolocate', 'STRING') == 'locate')
 	$content        = '<h2>' . JText::_('MOD_DD_GMAPS_MODULE_YOUR_LOCATION') . '</h2><b>' .
                         JText::_('MOD_DD_GMAPS_MODULE_YOUR_LATITUDE') . ':</b> ' . $lat . '<br><b>' .
                         JText::_('MOD_DD_GMAPS_MODULE_YOUR_LONGITUDE') . ':</b> ' . $lng;
-	$zoom           = 9;
 	$markertitle    = JText::_('MOD_DD_GMAPS_MODULE_YOUR_LOCATION');
 	$markericon     = JUri::base() . 'media/mod_dd_gmaps_module/img/marker_position.png';
-	echo "launchLocateInfoWindow($lat,$lng,'$content',$zoom,'$markertitle','$markericon');";
+	echo "launchLocateInfoWindow($lat, $lng, '$content', ZoomLevelInfoWindow, '$markertitle', '$markericon');";
 }
 
 // Profile pages info window
@@ -253,7 +247,7 @@ if ($input->get('profile_id') != 0)
 {
 	echo 'setTimeout(function(){
             var profileObj = jQuery.grep(GMapsLocations, function(e){ return e.id == ' . $input->get('profile_id', 0) . '; });
-            if(typeof profileObj[0] !== "undefined"){launchInfoWindow(profileObj[0].key)}
+            if(typeof profileObj[0] !== "undefined"){launchInfoWindow(profileObj[0].key, ZoomLevelInfoWindow)}
           }, 800);';
 }
 
@@ -262,7 +256,7 @@ elseif ($params->get('infowindow_opendefault') && $params->get('only_extended_lo
 {
 	echo 'setTimeout(function(){
             var profileObj = jQuery.grep(GMapsLocations, function(e){ return e.id == 0; });
-            if(typeof profileObj[0] !== "undefined"){launchInfoWindow(profileObj[0].key)}
+            if(typeof profileObj[0] !== "undefined"){launchInfoWindow(profileObj[0].key, ZoomLevelInfoWindow)}
           }, 800);';
 }
 
