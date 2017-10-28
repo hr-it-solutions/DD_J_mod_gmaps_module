@@ -13,7 +13,7 @@ var init_default_itemsJS = function () {
 
     var showOnMap = function (e) {
         var elementID = e.target.id.replace('showID','');
-        launchInfoWindow(elementID);
+        launchInfoWindow(elementID, ZoomLevelInfoWindow);
     };
 
     jQuery('.showOnMap').click(function (e) {
@@ -35,6 +35,26 @@ var init_default_itemsJS = function () {
         }
 
         return false;
+    });
+
+    jQuery('#toggleFullSize').click(function (e) {
+        jQuery('#dd_gmaps_fullsize').toggleClass('fullsize btn-alert');
+
+        var FullSizeButton = jQuery('.fullsize-btn');
+
+        if(FullSizeButton.html() === Joomla.JText._('MOD_DD_GMAPS_MODULE_FULLSIZE'))
+        {
+            FullSizeButton.html(Joomla.JText._('MOD_DD_GMAPS_MODULE_FULLSIZE_CLOSE'))
+        }
+        else
+        {
+            FullSizeButton.html(Joomla.JText._('MOD_DD_GMAPS_MODULE_FULLSIZE'))
+        }
+
+        FullSizeButton.toggleClass('btn-danger');
+
+        jQuery('#dd_gmaps').toggleClass('fullsize');
+        google.maps.event.trigger(map, "resize");
     });
 
 };
@@ -90,7 +110,7 @@ var initialize = function initialize() // Initializes Google Map
     var markerCluster = new MarkerClusterer(map, markers, mcOptions);
 };
 
-function launchInfoWindow(i) {
+function launchInfoWindow(i, zoom) {
     setTimeout(function(){
 
         if (typeof map !== 'undefined') {
@@ -108,16 +128,26 @@ function launchInfoWindow(i) {
                 icon: GMapsLocations[i].icon
             });
 
+            if (zoom !== undefined) {
+                map.setZoom(zoom)
+            }
             map.setCenter(marker.getPosition());
 
             // Config and open infoWindows
             infowindow.setContent(GMapsLocations[i].content);
             infowindow.open(map, marker);
 
+            // Add addListener to allow onclick infoWindows
+            google.maps.event.addListener(marker, 'mousedown', (function(marker) {
+                return function() {
+                    infowindow.open(map, marker);
+                }
+            })(marker));
+
         }
         else
         {
-            launchInfoWindow(i)
+            launchInfoWindow(i, zoom)
         }
     }, 400);
 }
@@ -152,11 +182,4 @@ function launchLocateInfoWindow(lat,lng,content,zoom,markertitle,merkericon) {
             launchLocateInfoWindow(lat,lng,content,zoom,markertitle,merkericon)
         }
     }, 400);
-}
-
-function toggleFullSize() {
-    jQuery('#dd_gmaps_fullsize').toggleClass('fullsize btn-alert');
-    jQuery('.fullsize-btn').toggleClass('btn-danger');
-    jQuery('#dd_gmaps').toggleClass('fullsize');
-    google.maps.event.trigger(map, "resize");
 }
