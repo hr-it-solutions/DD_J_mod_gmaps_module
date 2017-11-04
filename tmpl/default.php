@@ -26,7 +26,7 @@ JHtml::_('jQuery.Framework');
 	// Show fullsize
 	if ($params->get('fullsize')): ?>
         <div id="dd_gmaps_fullsize" class="pull-left">
-            <button onclick="toggleFullSize()"
+            <button id="toggleFullSize"
                     class="btn fullsize-btn"><?php echo JText::_('MOD_DD_GMAPS_MODULE_FULLSIZE'); ?></button>
         </div>
 	<?php endif; ?>
