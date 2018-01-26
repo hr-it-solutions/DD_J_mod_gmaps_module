@@ -1,0 +1,17 @@
+/**
+ * @package    DD_GMaps_Module Stylepack
+ * @adpated    developers.google.com example style-selector
+ **/
+{
+  this: [
+    {
+      featureType: 'poi.business',
+      stylers: [{visibility: 'off'}]
+    },
+    {
+      featureType: 'transit',
+      elementType: 'labels.icon',
+      stylers: [{visibility: 'off'}]
+    }
+  ]
+}
