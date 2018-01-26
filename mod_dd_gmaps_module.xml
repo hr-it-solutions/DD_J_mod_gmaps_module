@@ -304,6 +304,7 @@
                     <option value="night">Night mode</option>
                     <option value="retro">Retro</option>
                     <option value="hiding">Hide features</option>
+                    <option value="custom">Custom styles</option>
                 </field>
 
             </fieldset>
