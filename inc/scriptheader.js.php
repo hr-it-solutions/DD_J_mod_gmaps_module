@@ -3,7 +3,7 @@
  * @package    DD_GMaps_Module
  *
  * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @copyright  Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -223,6 +223,18 @@ var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?
 
 <?php // Initialize Map ?>
 var infowindow = new google.maps.InfoWindow();
+
+var styles = <?php
+    if($params->get('stylepack'))
+    {
+        require_once 'media/mod_dd_gmaps_module/js/styles/' . $params->get('stylepack') . '.json';
+    }
+    else
+    {
+        echo "{default: null}";
+    }
+?>;
+
 google.maps.event.addDomListener(window, 'load', initialize);
 
 <?php

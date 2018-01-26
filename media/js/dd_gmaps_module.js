@@ -2,7 +2,7 @@
  * @package    DD_GMaps_Module
  *
  * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @copyright  Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -72,6 +72,8 @@ var initialize = function initialize() // Initializes Google Map
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
     map = new google.maps.Map(document.getElementById("dd_gmaps"), googleMapOptions);
+
+    map.setOptions({styles: styles.this});
 
     // Add Locations
     var count = GMapsLocations.length; // Count Locations

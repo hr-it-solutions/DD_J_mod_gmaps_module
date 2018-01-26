@@ -9,6 +9,7 @@
 - Validate a single addresses via the backend (geocoding of the address)
 - Google Maps v3 integration (API key connection possible) Integrated Google JavaScript API and Geocoding API
 - Adjustable map size, position and zoom level
+- Styled map (including default stylepacks) https://developers.google.com/maps/documentation/javascript/examples/style-selector
 - Customizable markers, cluster markers and info box (PopUp by click on map)
 - Support all major web browsers
 
@@ -46,5 +47,5 @@ It is a namespace prefix, provided to avoid element name conflicts.
 
 <br>
 Author: HR IT-Solutions Florian Häusler https://www.hr-it-solution.com                      <br>
-Copyright: (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions                                    <br>
+Copyright: (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions                                    <br>
 http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
