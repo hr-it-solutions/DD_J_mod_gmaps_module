@@ -224,16 +224,16 @@ var home = new google.maps.LatLng(<?php echo $instance->paramLatLong($params); ?
 <?php // Initialize Map ?>
 var infowindow = new google.maps.InfoWindow();
 
-var styles = <?php
+var styles = {this: <?php
     if($params->get('stylepack'))
     {
         require_once 'media/mod_dd_gmaps_module/js/styles/' . $params->get('stylepack') . '.json';
     }
     else
     {
-        echo "{default: null}";
+        echo "null";
     }
-?>;
+?>};
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
