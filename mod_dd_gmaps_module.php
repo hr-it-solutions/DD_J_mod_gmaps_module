@@ -2,8 +2,8 @@
 /**
  * @package    DD_GMaps_Module
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions GmbH Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2018 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -59,7 +59,7 @@ $Places_API = 'js?&libraries=places&v=3';
 
 $doc = JFactory::getDocument();
 
-if (!ModDD_GMaps_Module_Helper::isset_Script($doc->_scripts, $Places_API))
+if (!$params->get('eu_privay_mode') && !ModDD_GMaps_Module_Helper::isset_Script($doc->_scripts, $Places_API))
 {
 	JHTML::_('script', 'https://maps.google.com/maps/api/' . $Places_API . '&key=' . $API_Key, array('relative' => false));
 }

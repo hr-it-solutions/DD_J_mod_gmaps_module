@@ -1,8 +1,8 @@
 /**
  * @package    DD_GMaps_Module
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions GmbH Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2018 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 #dd_gmaps {
@@ -11,6 +11,7 @@
     overflow: hidden;
     width: 100%;
     min-height: 320px;
+    position: relative;
 }
 
 #dd_gmaps img {
@@ -57,4 +58,21 @@
     right: 4px;
     top: 4px;
     z-index: 99999;
+}
+
+div#dd_gmaps_gdpr_text {
+    position: absolute;
+    cursor: pointer;
+    background-color: #fff;
+    color: #bd362f;
+    font-weight: bold;
+    display: inline-block;
+    bottom: 10px;
+    padding: 8px 18px;
+    left: 10px;
+    border: 2px solid #c4c4c4;
+    font-size: 12px;
+    box-sizing: border-box;
+    width: 80% !important;
+    height: auto !important;
 }

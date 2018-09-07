@@ -2,8 +2,8 @@
 /**
  * @package    DD_GMaps_Module
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions GmbH Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2018 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -75,7 +75,7 @@ function DDNotEmptyFlag($string)
 
 /**
  * @package    DD_GMaps_Module
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
+ * @author     HR-IT-Solutions GmbH Florian Häusler <info@hr-it-solutions.com>
  *
  * Sanitize_output
  * @sincer   Version 1.1.0.8
@@ -272,4 +272,6 @@ elseif ($params->get('infowindow_opendefault') && $params->get('only_extended_lo
           }, 800);';
 }
 
-ob_end_flush();
+?>
+
+<?php ob_end_flush(); ?>
