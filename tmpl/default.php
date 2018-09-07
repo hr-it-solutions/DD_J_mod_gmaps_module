@@ -2,8 +2,8 @@
 /**
  * @package    DD_GMaps_Module
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions GmbH Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2018 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -15,6 +15,9 @@ JHtml::_('jQuery.Framework');
 
 ?>
 <div class="dd_gmaps_module">
+	<?php if($params->get('eu_privay_mode') && $params->get('gdpr_cover')): ?>
+    <style>#dd_gmaps {background: url("<?php echo $params->get('gdpr_cover'); ?>"); background-size: cover;}</style>
+    <?php endif; ?>
 	<?php
 	// If force_map_size is enabled
 	if ($params->get('force_map_size'))
@@ -31,7 +34,11 @@ JHtml::_('jQuery.Framework');
         </div>
 	<?php endif; ?>
     <div id="dd_gmaps">
+        <?php if(!$params->get('eu_privay_mode')): ?>
         <p class="dd_gmaps_loader"><?php echo JText::_('MOD_DD_GMAPS_MODULE_MAPS_PRELOADER'); ?></p>
+        <?php else: ?>
+        <div id="dd_gmaps_gdpr_text"><?php echo JText::_('MOD_DD_GMAPS_MODULE_GDPR') . $params->get('gdpr_text'); ?></div>
+        <?php endif; ?>
     </div>
     <div class="clear"></div>
 </div>

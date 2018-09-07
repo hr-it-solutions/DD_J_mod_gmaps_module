@@ -9,7 +9,6 @@
 - Validate a single addresses via the backend (geocoding of the address)
 - Google Maps v3 integration (API key connection possible) Integrated Google JavaScript API and Geocoding API
 - Adjustable map size, position and zoom level
-- Styled map (including default stylepacks) https://developers.google.com/maps/documentation/javascript/examples/style-selector
 - Customizable markers, cluster markers and info box (PopUp by click on map)
 - Support all major web browsers
 
@@ -42,10 +41,10 @@ Joomla 3.6 +                                                                    
 PHP 5.6.13 or newer is recommended.
 
 # DD_ Namespace
-DD_ stands for  **D**idl**d**u e.K. | HR IT-Solutions (Brand recognition)                   <br>
+DD_ stands for  **D**idl**d**u a.k.a | HR-IT-Solutions GmbH (Brand recognition)              <br>
 It is a namespace prefix, provided to avoid element name conflicts.
 
 <br>
-Author: HR IT-Solutions Florian Häusler https://www.hr-it-solution.com                      <br>
-Copyright: (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions                                    <br>
+Author: HR-IT-Solutions GmbH Florian Häusler https://www.hr-it-solution.com                      <br>
+Copyright: (C) 2011 - 2018 HR-IT-Solutions GmbH                                    <br>
 http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only

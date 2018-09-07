@@ -75,7 +75,7 @@ function DDNotEmptyFlag($string)
 
 /**
  * @package    DD_GMaps_Module
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
+ * @author     HR-IT-Solutions GmbH Florian Häusler <info@hr-it-solutions.com>
  *
  * Sanitize_output
  * @sincer   Version 1.1.0.8
@@ -272,4 +272,6 @@ elseif ($params->get('infowindow_opendefault') && $params->get('only_extended_lo
           }, 800);';
 }
 
-ob_end_flush();
+?>
+
+<?php ob_end_flush(); ?>
