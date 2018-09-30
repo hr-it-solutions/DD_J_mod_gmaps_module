@@ -11,6 +11,7 @@
 - Adjustable map size, position and zoom level
 - Customizable markers, cluster markers and info box (PopUp by click on map)
 - Support all major web browsers
+- EU Privacy Mode (TwoClick option to load external scripts first after map click.)
 
 ##### Addon Features for DD Gmaps Locations Component:
 - Locations Linked to the map
