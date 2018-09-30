@@ -1,12 +1,12 @@
 <extension type="module" version="3.5.0" method="upgrade">
     <name>mod_dd_gmaps_module</name>
     <creationDate>06.04.2017</creationDate>
-    <author>HR IT-Solutions Florian Häusler</author>
+    <author>HR-IT-Solutions GmbH Florian Häusler</author>
     <authorEmail>info@hr-it-solutions.com</authorEmail>
     <authorUrl>https://www.hr-it-solutions.com</authorUrl>
-    <copyright>Copyright (C) 2011 - 2018 Didldu e.K. | HR IT-Solutions</copyright>
+    <copyright>Copyright (C) 2011 - 2018 HR-IT-Solutions GmbH</copyright>
     <license>GNU/GPLv2 only</license>
-    <version>1.1.1.6</version>
+    <version>1.1.1.7</version>
     <description>MOD_DD_GMAPS_MODULE_XML_DESCRIPTION</description>
 
     <files>
@@ -73,6 +73,43 @@
                         label="MOD_DD_GMAPS_MODULE_HEIGHT_LABEL"
                         description="MOD_DD_GMAPS_MODULE_HEIGHT_DESC"
                 />
+
+                <field type="spacer" name="euprivacy_spacer" label="&lt;hr/&gt;" />
+
+                <field name="eu_privay_mode"
+                       type="radio"
+                       default="0"
+                       label="MOD_DD_GMAPS_MODULE_GDPR_EU_PRIVAY_MODE_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_GDPR_EU_PRIVAY_MODE_DESC"
+                       class="btn-group btn-group-yesno">
+                    <option value="1">JENABLED</option>
+                    <option value="0">JDISABLED</option>
+                </field>
+
+                <field name="gdpr_text"
+                       type="text"
+                       default=""
+                       label="MOD_DD_GMAPS_MODULE_GDPR_TEXT_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_GDPR_TEXT_DESC"
+                       filter="safehtml" />
+
+                <field name="gdpr_cover"
+                       type="media"
+                       label="MOD_DD_GMAPS_MODULE_GDPR_COVER_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_GDPR_COVER_DESC" />
+
+                <field
+                        name="gdpr_lc"
+                        type="radio"
+                        default="0"
+                        label="MOD_DD_GMAPS_MODULE_GDPR_LC_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_GDPR_LC_DESC"
+                        class="btn-group btn-group-yesno">
+                    <option value="0">MOD_DD_GMAPS_MODULE_OFF</option>
+                    <option value="1">MOD_DD_GMAPS_MODULE_LOAD</option>
+                </field>
+
+                <field type="spacer" name="spacer_gdpr_end" label="MOD_DD_GMAPS_MODULE_GDPR_LC_SPACER" />
 
             </fieldset>
 
@@ -380,6 +417,6 @@
 
     <!-- Update servers -->
     <updateservers>
-        <server type="collection" priority="1" name="HR IT-Solutions Updates">http://www.hr-it-solutions.com/jextensions/update.xml</server>
+        <server type="collection" priority="1" name="HR-IT-Solutions GmbH Updates">http://www.hr-it-solutions.com/jextensions/update.xml</server>
     </updateservers>
 </extension>
