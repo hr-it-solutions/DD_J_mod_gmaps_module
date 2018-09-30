@@ -15,9 +15,9 @@ JHtml::_('jQuery.Framework');
 
 ?>
 <div class="dd_gmaps_module">
-	<?php if($params->get('eu_privay_mode') && $params->get('gdpr_cover')): ?>
-    <style>#dd_gmaps {background: url("<?php echo $params->get('gdpr_cover'); ?>"); background-size: cover;}</style>
-    <?php endif; ?>
+<?php if($params->get('eu_privay_mode') && $params->get('gdpr_cover')): ?>
+<style>#dd_gmaps {cursor: pointer; background: url("<?php echo $params->get('gdpr_cover'); ?>"); background-size: cover;}</style>
+<?php endif; ?>
 	<?php
 	// If force_map_size is enabled
 	if ($params->get('force_map_size'))
