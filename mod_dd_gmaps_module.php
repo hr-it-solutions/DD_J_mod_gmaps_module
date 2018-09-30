@@ -54,22 +54,23 @@ else
 		);
 	}
 }
-
 $Places_API = 'js?&libraries=places&v=3';
+
+$mapsScript = 'https://maps.google.com/maps/api/' . $Places_API . '&key=' . $API_Key;
 
 $doc = JFactory::getDocument();
 
 if (!$params->get('eu_privay_mode') && !ModDD_GMaps_Module_Helper::isset_Script($doc->_scripts, $Places_API))
 {
-	JHTML::_('script', 'https://maps.google.com/maps/api/' . $Places_API . '&key=' . $API_Key, array('relative' => false));
+	JHTML::_('script', $mapsScript, array('relative' => false));
 }
 
 JHTML::_('script', 'mod_dd_gmaps_module/markerclusterer_compiled.min.js', array('version' => 'auto', 'relative' => true));
 JHTML::_('script', 'mod_dd_gmaps_module/dd_gmaps_module.min.js', array('version' => 'auto', 'relative' => true));
 
+require_once "modules/mod_dd_gmaps_module/inc/scriptheader.js.php";
 
 // Check for a custom CSS file
 JHtml::_('stylesheet', 'mod_dd_gmaps_module/user.css', array('version' => 'auto', 'relative' => true));
 
-require_once "modules/mod_dd_gmaps_module/inc/scriptheader.js.php";
 require_once JModuleHelper::getLayoutPath('mod_dd_gmaps_module', $params->get('layout', 'default'));
