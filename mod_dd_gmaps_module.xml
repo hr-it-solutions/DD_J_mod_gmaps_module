@@ -4,9 +4,9 @@
     <author>HR-IT-Solutions GmbH Florian Häusler</author>
     <authorEmail>info@hr-it-solutions.com</authorEmail>
     <authorUrl>https://www.hr-it-solutions.com</authorUrl>
-    <copyright>Copyright (C) 2011 - 2018 HR-IT-Solutions GmbH</copyright>
+    <copyright>Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH</copyright>
     <license>GNU/GPLv2 only</license>
-    <version>1.1.1.8</version>
+    <version>1.1.1.9</version>
     <description>MOD_DD_GMAPS_MODULE_XML_DESCRIPTION</description>
 
     <files>
@@ -299,53 +299,6 @@
                 />
 
             </fieldset>
-
-            <!-- Marker Images -->
-            <fieldset name="marker"
-                      label="MOD_DD_GMAPS_MODULE_MARKER_SETTINGS_LABEL"
-                      description="MOD_DD_GMAPS_MODULE_MARKER_SETTINGS_DESC"
-            >
-
-                <field name="marker_image"
-                       type="media"
-                       directory="dd_gmaps_module"
-                       size="40"
-                       label="MOD_DD_GMAPS_MODULE_MARKER_IMAGE_LABEL"
-                       description="MOD_DD_GMAPS_MODULE_MARKER_IMAGE_DESC"
-                />
-
-                <field name="clustermarker_image"
-                       type="media"
-                       directory="dd_gmaps_module"
-                       size="40"
-                       label="MOD_DD_GMAPS_MODULE_CLUSTERMARKER_IMAGE_LABEL"
-                       description="MOD_DD_GMAPS_MODULE_CLUSTERMARKER_IMAGE_DESC"
-                />
-
-            </fieldset>
-
-            <!-- Stylepacks -->
-            <fieldset name="style"
-                      label="MOD_DD_GMAPS_MODULE_STYLE_SETTINGS_LABEL"
-                      description="MOD_DD_GMAPS_MODULE_STYLE_SETTINGS_DESC"
-            >
-
-                <field name="stylepack"
-                       type="list"
-                       description="MOD_DD_GMAPS_MODULE_STYLEPACK_DESC"
-                       label="MOD_DD_GMAPS_MODULE_STYLEPACK_LABEL"
-                       default="0"
-                >
-                    <option value="0">Default</option>
-                    <option value="silver">Silver</option>
-                    <option value="night">Night mode</option>
-                    <option value="retro">Retro</option>
-                    <option value="hiding">Hide features</option>
-                    <option value="custom">Custom styles</option>
-                </field>
-
-            </fieldset>
-
 
             <fieldset  name="addonfeatures"
                        label="MOD_DD_GMAPS_MODULE_ADDONFEATURES_LABEL"

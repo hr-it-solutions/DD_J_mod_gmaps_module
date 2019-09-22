@@ -338,46 +338,4 @@ class ModDD_GMaps_Module_Helper
 
 		return '48.0000000, 2.0000000';
 	}
-
-	/**
-	 * Parameter helper to get marker image
-	 *
-	 * @param   string  $params  parameter
-	 *
-	 * @return  boolean
-	 *
-	 * @since   Version 1.1.0.0
-	 */
-	public function paramMarkerImage($params)
-	{
-		if (strlen($params->get('marker_image')))
-		{
-			return JUri::base() . (string) $params->get('marker_image');
-		}
-		else
-		{
-			return JUri::base() . 'media/mod_dd_gmaps_module/img/marker.png';
-		}
-	}
-
-	/**
-	 * Parameter helper to get cluster marker image
-	 *
-	 * @param   string  $params  parameter
-	 *
-	 * @return  boolean
-	 *
-	 * @since   Version 1.1.0.0
-	 */
-	public function paramClusterMarkerImage($params)
-	{
-		if (strlen($params->get('clustermarker_image')))
-		{
-			return JUri::base() . (string) $params->get('clustermarker_image');
-		}
-		else
-		{
-			return JUri::base() . 'media/mod_dd_gmaps_module/img/marker_cluster.png';
-		}
-	}
 }
