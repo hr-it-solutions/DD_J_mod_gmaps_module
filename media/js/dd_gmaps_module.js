@@ -1,8 +1,8 @@
 /**
  * @package    DD_GMaps_Module
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions GmbH Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2018 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
@@ -11,13 +11,50 @@ var markers = [];
 
 var init_default_itemsJS = function () {
 
-    jQuery('.showOnMap').click(function (e) {
-
+    var showOnMap = function (e) {
         var elementID = e.target.id.replace('showID','');
-        launchInfoWindow(elementID);
+        launchInfoWindow(elementID, ZoomLevelInfoWindow);
+    };
 
-        jQuery("html, body").animate({ scrollTop: 0 }, "slow");
+    jQuery('.showOnMap').click(function (e) {
+        showOnMap(e);
+
+        if (jQuery(this).attr('data-showonmap_action')) {
+
+            switch(jQuery(this).attr('data-showonmap_action')) {
+                case 'toid':
+                    jQuery("html, body").animate({ scrollTop: jQuery('#dd_gmaps').offset().top }, 1000);
+                    break;
+                case 'totop':
+                    jQuery("html, body").animate({ scrollTop: 0 }, "slow");
+                    break;
+                case 'tobottom':
+                    jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, "slow");
+                    break;
+            }
+        }
+
         return false;
+    });
+
+    jQuery('#toggleFullSize').click(function (e) {
+        jQuery('#dd_gmaps_fullsize').toggleClass('fullsize btn-alert');
+
+        var FullSizeButton = jQuery('.fullsize-btn');
+
+        if(FullSizeButton.html() === Joomla.JText._('MOD_DD_GMAPS_MODULE_FULLSIZE'))
+        {
+            FullSizeButton.html(Joomla.JText._('MOD_DD_GMAPS_MODULE_FULLSIZE_CLOSE'))
+        }
+        else
+        {
+            FullSizeButton.html(Joomla.JText._('MOD_DD_GMAPS_MODULE_FULLSIZE'))
+        }
+
+        FullSizeButton.toggleClass('btn-danger');
+
+        jQuery('#dd_gmaps').toggleClass('fullsize');
+        google.maps.event.trigger(map, "resize");
     });
 
 };
@@ -35,6 +72,8 @@ var initialize = function initialize() // Initializes Google Map
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
     map = new google.maps.Map(document.getElementById("dd_gmaps"), googleMapOptions);
+
+    map.setOptions({styles: styles.this});
 
     // Add Locations
     var count = GMapsLocations.length; // Count Locations
@@ -73,7 +112,7 @@ var initialize = function initialize() // Initializes Google Map
     var markerCluster = new MarkerClusterer(map, markers, mcOptions);
 };
 
-function launchInfoWindow(i) {
+function launchInfoWindow(i, zoom) {
     setTimeout(function(){
 
         if (typeof map !== 'undefined') {
@@ -91,16 +130,26 @@ function launchInfoWindow(i) {
                 icon: GMapsLocations[i].icon
             });
 
+            if (zoom !== undefined) {
+                map.setZoom(zoom)
+            }
             map.setCenter(marker.getPosition());
 
             // Config and open infoWindows
             infowindow.setContent(GMapsLocations[i].content);
             infowindow.open(map, marker);
 
+            // Add addListener to allow onclick infoWindows
+            google.maps.event.addListener(marker, 'mousedown', (function(marker) {
+                return function() {
+                    infowindow.open(map, marker);
+                }
+            })(marker));
+
         }
         else
         {
-            launchInfoWindow(i)
+            launchInfoWindow(i, zoom)
         }
     }, 400);
 }
@@ -135,11 +184,4 @@ function launchLocateInfoWindow(lat,lng,content,zoom,markertitle,merkericon) {
             launchLocateInfoWindow(lat,lng,content,zoom,markertitle,merkericon)
         }
     }, 400);
-}
-
-function toggleFullSize() {
-    jQuery('#dd_gmaps_fullsize').toggleClass('fullsize btn-alert');
-    jQuery('.fullsize-btn').toggleClass('btn-danger');
-    jQuery('#dd_gmaps').toggleClass('fullsize');
-    google.maps.event.trigger(map, "resize");
 }

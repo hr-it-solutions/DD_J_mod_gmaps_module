@@ -2,19 +2,19 @@
 /**
  * @package    DD_GMaps_Module
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions GmbH Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
 defined('_JEXEC') or die;
 
-require_once __DIR__ . '/helper.php';
+JLoader::register('ModDD_GMaps_Module_Helper', __DIR__ . '/helper.php');
 
 $app = JFactory::getApplication();
 
-// Multiload prevention
-if (!isset($checkMultiload_DD_GMaps_Module))
+// Multiload prevention todo J3.8
+if (false)
 {
 	$app->enqueueMessage(
 		JText::_('MOD_DD_GMAPS_MODULE_WARNUNG_MODUL_EXISTS_ALREADY'), 'warning'
@@ -22,11 +22,6 @@ if (!isset($checkMultiload_DD_GMaps_Module))
 
 	return false;
 }
-
-$doc = JFactory::getDocument();
-
-// Include the functions only once
-JLoader::register('ModDD_GMaps_Module_Helper', __DIR__ . '/helper.php');
 
 // Check if plugin geocode is enabled
 if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode'))
@@ -59,16 +54,23 @@ else
 		);
 	}
 }
-
 $Places_API = 'js?&libraries=places&v=3';
 
-if (!ModDD_GMaps_Module_Helper::isset_Script($doc->_scripts, $Places_API))
+$mapsScript = 'https://maps.google.com/maps/api/' . $Places_API . '&key=' . $API_Key;
+
+$doc = JFactory::getDocument();
+
+if (!$params->get('eu_privay_mode') && !ModDD_GMaps_Module_Helper::isset_Script($doc->_scripts, $Places_API))
 {
-	$doc->addScript('https://maps.google.com/maps/api/' . $Places_API . '&key=' . $API_Key);
+	JHTML::_('script', $mapsScript, array('relative' => false));
 }
 
-$doc->addScript(JUri::base() . 'media/mod_dd_gmaps_module/js/markerclusterer_compiled.min.js');
-$doc->addScript(JUri::base() . 'media/mod_dd_gmaps_module/js/dd_gmaps_module.min.js');
+JHTML::_('script', 'mod_dd_gmaps_module/markerclusterer_compiled.min.js', array('version' => 'auto', 'relative' => true));
+JHTML::_('script', 'mod_dd_gmaps_module/dd_gmaps_module.min.js', array('version' => 'auto', 'relative' => true));
 
 require_once "modules/mod_dd_gmaps_module/inc/scriptheader.js.php";
+
+// Check for a custom CSS file
+JHtml::_('stylesheet', 'mod_dd_gmaps_module/user.css', array('version' => 'auto', 'relative' => true));
+
 require_once JModuleHelper::getLayoutPath('mod_dd_gmaps_module', $params->get('layout', 'default'));

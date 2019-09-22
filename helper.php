@@ -2,14 +2,12 @@
 /**
  * @package    DD_GMaps_Module
  *
- * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions
+ * @author     HR-IT-Solutions GmbH Florian Häusler <info@hr-it-solutions.com>
+ * @copyright  Copyright (C) 2011 - 2018 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
 defined('_JEXEC') or die;
-
-$checkMultiload_DD_GMaps_Module = true;
 
 /**
  * Helper for mod_dd_gmaps_module
@@ -108,9 +106,44 @@ class ModDD_GMaps_Module_Helper
 
 		$db = JFactory::getDbo();
 		$query = $model->getListQuery();
+
+		$jinput = JFactory::getApplication()->input;
+
+		$module = JModuleHelper::getModule('mod_dd_gmaps_module');
+		$params = new JRegistry($module->params);
+
+		// Load only locationcategory items outside of com_dd_gmaps_locations view locations
+		if ($jinput->get('option') !== 'com_dd_gmaps_locations') // Important case to not break locations association
+		{
+			if ($params->get('locationcategory') !== "0")
+			{
+				$query->where($db->quoteName('catid') . '= ' . (int) $params->get('locationcategory'));
+			}
+		}
+
 		$db->setQuery($query);
 
-		return $db->loadObjectList();
+		$results = $db->loadObjectList();
+
+		// Extc Plugins
+		if ($params->get('extcplugins') !== '0')
+		{
+			// Get param, expected 'com_k2' etc...
+			$extc_plugin = $params->get('extcplugins');
+
+			JPluginHelper::importPlugin('dd_gmaps_locations');
+			$dispatcher = JEventDispatcher::getInstance();
+			$plg_results = $dispatcher->trigger('onextc', array(&$results, &$extc_plugin))[0];
+
+			if (!empty($plg_results))
+			{
+				// Prepear plg_results in loop
+				$results = $plg_results;
+			}
+		}
+
+		return $results;
+
 	}
 
 	/**
@@ -138,14 +171,36 @@ class ModDD_GMaps_Module_Helper
 		$return[0]->location       = $params->get('location', '');
 		$return[0]->zip            = $params->get('zip', '');
 		$return[0]->country        = $params->get('country', '');
+		$return[0]->federalstate   = $params->get('federalstate', '');
 
 		// Try to get geoCode address parameter > geoCoded via dd_gmaps_locations_geocode plugin or default value
 		$return[0]->latitude       = $params->get('latitude', '48.0000000');
 		$return[0]->longitude      = $params->get('longitude', '2.0000000');
 
-		// If geoCode plugin is not enabled, geCode addresses on the fly without saving!
-		if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode'))
+		// Try to get geoCode HardCoding
+		if (($params->get('geohardcode') !== '0'))
 		{
+			if ($this->validateLatLong($params->get('latitude_hardcode'), $params->get('longitude_hardcode')))
+			{
+				$return[0]->latitude       = $params->get('latitude_hardcode');
+				$return[0]->longitude      = $params->get('longitude_hardcode');
+			}
+			else
+			{
+				JFactory::getApplication()->enqueueMessage(
+					JText::_('MOD_DD_GMAPS_MODULE_API_ALERT_GEOLOCATION_FAILED_ZERO_RESULTS_HARDCODE'),
+					'warning'
+				);
+				goto fallbackGeoCode;
+			}
+		}
+
+		// If geoCode plugin is not enabled and geoCode HardCoding ist not enabled,
+		// geCode addresses on the fly without saving!
+		if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode')
+			&& $params->get('geohardcode') !== '1' )
+		{
+			fallbackGeoCode:
 			// Get latitude and longitude
 			$latlng = $this->Geocode_Location_To_LatLng($return, $params->get('google_api_key_geocode'));
 			$return[0]->latitude   = $latlng['latitude'];
@@ -153,6 +208,22 @@ class ModDD_GMaps_Module_Helper
 		}
 
 		return $return;
+	}
+
+	/**
+	 * Validates coordinate
+	 * Adapted from https://gist.github.com/arubacao/b5683b1dab4e4a47ee18fd55d9efbdd1
+	 *
+	 * @param   float  $lat   Latitude
+	 * @param   float  $long  Longitude
+	 *
+	 * @return  bool `true` if the coordinate is valid, `false` if not
+	 */
+	private function validateLatLong($lat, $long)
+	{
+		$latlong = preg_replace("/[^0-9,.]/", "", $lat . ',' . $long);
+
+		return preg_match('/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?),[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/', $latlong);
 	}
 
 	/**
@@ -254,53 +325,17 @@ class ModDD_GMaps_Module_Helper
 	{
 		if ($params->get('set_as_default_position'))
 		{
+			if (($params->get('geohardcode') !== '0'))
+			{
+				if ($this->validateLatLong($params->get('latitude_hardcode'), $params->get('longitude_hardcode')))
+				{
+					return (float) $params->get('latitude_hardcode') . ', ' . (float) $params->get('longitude_hardcode');
+				}
+			}
+
 			return (float) $params->get('latitude') . ', ' . (float) $params->get('longitude');
 		}
-		else
-		{
-			return '48.0000000, 2.0000000';
-		}
-	}
 
-	/**
-	 * Parameter helper to get marker image
-	 *
-	 * @param   string  $params  parameter
-	 *
-	 * @return  boolean
-	 *
-	 * @since   Version 1.1.0.0
-	 */
-	public function paramMarkerImage($params)
-	{
-		if (strlen($params->get('marker_image')))
-		{
-			return JUri::base() . (string) $params->get('marker_image');
-		}
-		else
-		{
-			return JUri::base() . 'media/mod_dd_gmaps_module/img/marker.png';
-		}
-	}
-
-	/**
-	 * Parameter helper to get cluster marker image
-	 *
-	 * @param   string  $params  parameter
-	 *
-	 * @return  boolean
-	 *
-	 * @since   Version 1.1.0.0
-	 */
-	public function paramClusterMarkerImage($params)
-	{
-		if (strlen($params->get('clustermarker_image')))
-		{
-			return JUri::base() . (string) $params->get('clustermarker_image');
-		}
-		else
-		{
-			return JUri::base() . 'media/mod_dd_gmaps_module/img/marker_cluster.png';
-		}
+		return '48.0000000, 2.0000000';
 	}
 }

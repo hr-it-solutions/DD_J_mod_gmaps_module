@@ -1,12 +1,12 @@
 <extension type="module" version="3.5.0" method="upgrade">
     <name>mod_dd_gmaps_module</name>
     <creationDate>06.04.2017</creationDate>
-    <author>HR IT-Solutions Florian Häusler</author>
+    <author>HR-IT-Solutions GmbH Florian Häusler</author>
     <authorEmail>info@hr-it-solutions.com</authorEmail>
     <authorUrl>https://www.hr-it-solutions.com</authorUrl>
-    <copyright>Copyright (C) 2011 - 2017 Didldu e.K. | HR IT-Solutions</copyright>
+    <copyright>Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH</copyright>
     <license>GNU/GPLv2 only</license>
-    <version>1.1.1.2</version>
+    <version>1.1.1.9</version>
     <description>MOD_DD_GMAPS_MODULE_XML_DESCRIPTION</description>
 
     <files>
@@ -74,6 +74,43 @@
                         description="MOD_DD_GMAPS_MODULE_HEIGHT_DESC"
                 />
 
+                <field type="spacer" name="euprivacy_spacer" label="&lt;hr/&gt;" />
+
+                <field name="eu_privay_mode"
+                       type="radio"
+                       default="0"
+                       label="MOD_DD_GMAPS_MODULE_GDPR_EU_PRIVAY_MODE_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_GDPR_EU_PRIVAY_MODE_DESC"
+                       class="btn-group btn-group-yesno">
+                    <option value="1">JENABLED</option>
+                    <option value="0">JDISABLED</option>
+                </field>
+
+                <field name="gdpr_text"
+                       type="text"
+                       default=""
+                       label="MOD_DD_GMAPS_MODULE_GDPR_TEXT_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_GDPR_TEXT_DESC"
+                       filter="safehtml" />
+
+                <field name="gdpr_cover"
+                       type="media"
+                       label="MOD_DD_GMAPS_MODULE_GDPR_COVER_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_GDPR_COVER_DESC" />
+
+                <field
+                        name="gdpr_lc"
+                        type="radio"
+                        default="0"
+                        label="MOD_DD_GMAPS_MODULE_GDPR_LC_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_GDPR_LC_DESC"
+                        class="btn-group btn-group-yesno">
+                    <option value="0">MOD_DD_GMAPS_MODULE_OFF</option>
+                    <option value="1">MOD_DD_GMAPS_MODULE_LOAD</option>
+                </field>
+
+                <field type="spacer" name="spacer_gdpr_end" label="MOD_DD_GMAPS_MODULE_GDPR_LC_SPACER" />
+
             </fieldset>
 
             <!-- Default Address -->
@@ -131,7 +168,9 @@
                 <fieldset addfieldpath="/modules/mod_dd_gmaps_module/fields">
                     <field name="country" type="country" label="MOD_DD_GMAPS_MODULE_COUNTRY_LABEL"
                            description="MOD_DD_GMAPS_MODULE_COUNTRY_DESC"
-                           required="true" />
+                           required="true">
+                        <option value="">MOD_DD_GMAPS_MODULE_COUNTRY_SELECT</option>
+                    </field>
                 </fieldset>
 
                 <field name="federalstate"
@@ -159,7 +198,40 @@
                        description="MOD_DD_GMAPS_MODULE_LONGITUDE_DESC"
                 />
 
+                <field type="spacer" name="geohardcode_spacer" label="MOD_DD_GMAPS_MODULE_GEOHARDCODE" />
+
+                <field
+                        name="geohardcode"
+                        type="radio"
+                        default="0"
+                        label="MOD_DD_GMAPS_MODULE_GEOHARDCODE_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_GEOHARDCODE_DESC"
+                        class="btn-group btn-group-yesno">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="latitude_hardcode"
+                       type="text"
+                       default="auto"
+                       label="MOD_DD_GMAPS_MODULE_LATITUDE_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_LATITUDE_DESC"
+                />
+
+                <field name="longitude_hardcode"
+                       type="text"
+                       default="auto"
+                       label="MOD_DD_GMAPS_MODULE_LONGITUDE_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_LONGITUDE_DESC"
+                />
+
+                <fieldset addfieldpath="/modules/mod_dd_gmaps_module/fields">
+                    <field name="geohardcodescript" type="geohardcodescript" label="MOD_DD_GMAPS_MODULE_GEOHARDCODE_UNSET" />
+                    <!-- GeoHardCode Script -->
+                </fieldset>
+
             </fieldset>
+
             <!-- Google API Settings -->
             <fieldset name="google_api_settings"
                       label="MOD_DD_GMAPS_MODULE_API_SETTINGS_LABEL"
@@ -180,26 +252,50 @@
 
             </fieldset>
 
-            <!-- Marker Images -->
-            <fieldset name="marker"
-                      label="MOD_DD_GMAPS_MODULE_MARKER_SETTINGS_LABEL"
-                      description="MOD_DD_GMAPS_MODULE_MARKER_SETTINGS_DESC"
+            <!-- InfoWindow -->
+            <fieldset name="infowindow"
+                      label="MOD_DD_GMAPS_MODULE_INFOWINDOW_SETTINGS_LABEL"
+                      description="MOD_DD_GMAPS_MODULE_INFOWINDOW_SETTINGS_DESC"
             >
 
-                <field name="marker_image"
-                       type="media"
-                       directory="dd_gmaps_module"
-                       size="40"
-                       label="MOD_DD_GMAPS_MODULE_MARKER_IMAGE_LABEL"
-                       description="MOD_DD_GMAPS_MODULE_MARKER_IMAGE_DESC"
+                <field
+                        name="infowindow_opendefault"
+                        type="radio"
+                        default="0"
+                        label="MOD_DD_GMAPS_MODULE_INFOWINDOW_OPEN_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_INFOWINDOW_OPEN_DESC"
+                        class="btn-group btn-group-yesno">
+                    <option value="1">MOD_DD_GMAPS_MODULE_INFOWINDOW_OPEN_AUTOSHOW</option>
+                    <option value="0">MOD_DD_GMAPS_MODULE_INFOWINDOW_OPEN_ONCLICK</option>
+                </field>
+
+                <field
+                        name="zoomlevel_infowindow"
+                        type="integer"
+                        first="1"
+                        last="20"
+                        step="1"
+                        default="4"
+                        label="MOD_DD_GMAPS_MODULE_ZOOMLEVEL_INFOWINDOW_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_ZOOMLEVEL_INFOWINDOW_DESC"
                 />
 
-                <field name="clustermarker_image"
-                       type="media"
-                       directory="dd_gmaps_module"
-                       size="40"
-                       label="MOD_DD_GMAPS_MODULE_CLUSTERMARKER_IMAGE_LABEL"
-                       description="MOD_DD_GMAPS_MODULE_CLUSTERMARKER_IMAGE_DESC"
+                <field
+                        name="infowindow_defaultaddress"
+                        type="radio"
+                        default="1"
+                        label="MOD_DD_GMAPS_MODULE_INFOWINDOW_DEFAULTADDRESS_LABEL"
+                        description="MOD_DD_GMAPS_MODULE_INFOWINDOW_DEFAULTADDRESS_DESC"
+                        class="btn-group btn-group-yesno">
+                    <option value="1">JSHOW</option>
+                    <option value="0">JHIDE</option>
+                </field>
+
+                <field name="infowindow_content"
+                       type="editor"
+                       label="MOD_DD_GMAPS_MODULE_INFOWINDOW_CONTENT_LABEL"
+                       description="MOD_DD_GMAPS_MODULE_INFOWINDOW_CONTENT_DESC"
+                       idth="300" filter="safehtml" />
                 />
 
             </fieldset>
@@ -232,6 +328,20 @@
                     <option value="0">JNO</option>
                 </field>
 
+                <fieldset addfieldpath="/modules/mod_dd_gmaps_module/fields">
+                    <field name="locationcategory" type="locationcategory" label="MOD_DD_GMAPS_MODULE_ONLY_LOCATION_CATEGORY_LABEL"
+                           description="MOD_DD_GMAPS_MODULE_ONLY_LOCATION_CATEGORY_DESC" />
+                </fieldset>
+
+                <field type="spacer" name="addonfeatures_extcid" label="MOD_DD_GMAPS_MODULE_ADDON_DDGMAPS_LOCATIONS_EXTCID" />
+
+                <fieldset addfieldpath="/modules/mod_dd_gmaps_module/fields">
+                    <field name="extcplugins" type="extcplugins" label="MOD_DD_GMAPS_MODULE_ONLY_LOCATION_EXTCID_LABEL"
+                           description="MOD_DD_GMAPS_MODULE_ONLY_LOCATION_EXTCID_DESC" />
+                </fieldset>
+
+                <field type="spacer" name="addonfeatures_extcid_note" label="MOD_DD_GMAPS_MODULE_ADDON_DDGMAPS_LOCATIONS_EXTCID_NOTE" />
+
             </fieldset>
 
             <fieldset name="advanced">
@@ -260,6 +370,6 @@
 
     <!-- Update servers -->
     <updateservers>
-        <server type="collection" priority="1" name="HR IT-Solutions Updates">http://www.hr-it-solutions.com/jextensions/update.xml</server>
+        <server type="collection" priority="1" name="HR-IT-Solutions GmbH Updates">http://www.hr-it-solutions.com/jextensions/update.xml</server>
     </updateservers>
 </extension>
