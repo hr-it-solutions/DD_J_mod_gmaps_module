@@ -3,7 +3,7 @@
  * @package    DD_GMaps_Module
  *
  * @author     HR-IT-Solutions GmbH Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2018 HR-IT-Solutions GmbH
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 

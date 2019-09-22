@@ -82,7 +82,7 @@ ob_start();
 
 echo 'jQuery(document).ready(function () { init_default_itemsJS(); });';
 echo 'var home = new google.maps.LatLng(' . $instance->paramLatLong($params) . '), ';
-echo "settingsClusterIcon = '" . $instance->paramClusterMarkerImage($params) . "',";
+echo "settingsClusterIcon = 'media/mod_dd_gmaps_module/img/marker_cluster.png',";
 echo 'settingsZoomLevel   = ' . (int) $params->get('zoomlevel', 4) . ',  ';
 echo "ZoomLevelInfoWindow = " . (int) $params->get('zoomlevel_infowindow', 9) . ',';
 
@@ -104,7 +104,7 @@ foreach ( $items as $i => $item ):
         }
         else
         {
-            $icon = $instance->paramMarkerImage($params);
+            $icon = 'media/mod_dd_gmaps_module/img/marker.png';
             $height = 32;
         }
     }
@@ -213,14 +213,7 @@ endforeach;
 
 echo ']; var infowindow = new google.maps.InfoWindow(); var styles = {this:';
 
-    if($params->get('stylepack'))
-    {
-        require_once 'media/mod_dd_gmaps_module/js/styles/' . $params->get('stylepack') . '.json';
-    }
-    else
-    {
-        echo "null";
-    }
+    echo "null";
 
 echo '};';
 
