@@ -3,20 +3,20 @@
  * @package    DD_GMaps_Module
  *
  * @author     HR-IT-Solutions GmbH Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2018 HR-IT-Solutions GmbH
+ * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
 defined('_JEXEC') or die;
 
-JHtml::_('stylesheet', 'mod_dd_gmaps_module/dd_gmaps_module.min.css', array('version' => 'auto', 'relative' => true));
+JHtml::_('stylesheet', 'mod_dd_gmaps_module/dd_gmaps_module.css', array('version' => 'auto', 'relative' => true));
 
 JHtml::_('jQuery.Framework');
 
 ?>
 <div class="dd_gmaps_module">
 <?php if($params->get('eu_privay_mode') && $params->get('gdpr_cover')): ?>
-<style>#dd_gmaps {cursor: pointer; background: url("<?php echo $params->get('gdpr_cover'); ?>"); background-size: cover;}</style>
+<style>#dd_gmaps {cursor: pointer; background: url("<?php echo JURI::base() . $params->get('gdpr_cover'); ?>"); background-size: cover;}</style>
 <?php endif; ?>
 	<?php
 	// If force_map_size is enabled
