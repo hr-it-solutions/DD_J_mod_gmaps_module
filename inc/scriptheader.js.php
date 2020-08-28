@@ -9,12 +9,18 @@
 
 defined('_JEXEC') or die();
 
-JText::script('MOD_DD_GMAPS_MODULE');
-JText::script('MOD_DD_GMAPS_MODULE_FULLSIZE');
-JText::script('MOD_DD_GMAPS_MODULE_FULLSIZE_CLOSE');
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\Module\DD_GMaps_Module\Site\Helper\DD_GMaps_ModuleHelper;
+use Joomla\CMS\Uri\Uri;
+use Joomla\CMS\Router\Route;
 
-$app      = JFactory::getApplication();
-$instance = new ModDD_GMaps_Module_Helper;
+Text::script('MOD_DD_GMAPS_MODULE');
+Text::script('MOD_DD_GMAPS_MODULE_FULLSIZE');
+Text::script('MOD_DD_GMAPS_MODULE_FULLSIZE_CLOSE');
+
+$app      = Factory::getApplication();
+$instance = new DD_GMaps_ModuleHelper;
 $input    = $app->input;
 
 if (!$instance->existsDDGMapsLocations())
@@ -82,7 +88,7 @@ ob_start();
 
 echo 'jQuery(document).ready(function () { init_default_itemsJS(); });';
 echo 'var home = new google.maps.LatLng(' . $instance->paramLatLong($params) . '), ';
-echo "settingsClusterIcon = 'media/mod_dd_gmaps_module/img/marker_cluster.png',";
+echo "settingsClusterIcon = '" . Uri::base() . "media/mod_dd_gmaps_module/img/marker_cluster.png',";
 echo 'settingsZoomLevel   = ' . (int) $params->get('zoomlevel', 4) . ',  ';
 echo "ZoomLevelInfoWindow = " . (int) $params->get('zoomlevel_infowindow', 9) . ',';
 
@@ -96,7 +102,7 @@ foreach ( $items as $i => $item ):
         if ($extended_location && isset($item->category_params) && json_decode($item->category_params)->image)
         {
             $imagefile = str_replace('\\', '/', json_decode($item->category_params)->image);
-            $icon      = JUri::base() . $imagefile;
+            $icon      = Uri::base() . $imagefile;
             $size      = getimagesize($imagefile);
 
             // Calculate height based on image width
@@ -118,11 +124,11 @@ foreach ( $items as $i => $item ):
             if (isset($item->ext_c_id) && $item->ext_c_id !== '0' && isset($item->extc_link))
             {
                 // Ext C 3rd Party Links
-                $title_link = JRoute::_($item->extc_link);
+                $title_link = Route::_($item->extc_link);
             }
             else
             {
-                $title_link = JRoute::_('index.php?option=com_dd_gmaps_locations&view=profile&id=' . (int) $item->id
+                $title_link = Route::_('index.php?option=com_dd_gmaps_locations&view=profile&id=' . (int) $item->id
                     . ':' . htmlspecialchars($item->alias, ENT_QUOTES, 'UTF-8'));
             }
 
@@ -230,11 +236,11 @@ if ($input->get('geolocate', 'STRING') == 'locate')
 	$locationLatLng = explode(',', $input->get('locationLatLng', '', 'STRING'));
 	$lat            = substr($locationLatLng[0], 0, 10);
 	$lng            = substr($locationLatLng[1], 0, 10);
-	$content        = '<h2>' . JText::_('MOD_DD_GMAPS_MODULE_YOUR_LOCATION') . '</h2><b>' .
-                        JText::_('MOD_DD_GMAPS_MODULE_YOUR_LATITUDE') . ':</b> ' . $lat . '<br><b>' .
-                        JText::_('MOD_DD_GMAPS_MODULE_YOUR_LONGITUDE') . ':</b> ' . $lng;
-	$markertitle    = JText::_('MOD_DD_GMAPS_MODULE_YOUR_LOCATION');
-	$markericon     = JUri::base() . 'media/mod_dd_gmaps_module/img/marker_position.png';
+	$content        = '<h2>' . Text::_('MOD_DD_GMAPS_MODULE_YOUR_LOCATION') . '</h2><b>' .
+                        Text::_('MOD_DD_GMAPS_MODULE_YOUR_LATITUDE') . ':</b> ' . $lat . '<br><b>' .
+                        Text::_('MOD_DD_GMAPS_MODULE_YOUR_LONGITUDE') . ':</b> ' . $lng;
+	$markertitle    = Text::_('MOD_DD_GMAPS_MODULE_YOUR_LOCATION');
+	$markericon     = Uri::base() . 'media/mod_dd_gmaps_module/img/marker_position.png';
 	echo "launchLocateInfoWindow($lat, $lng, '$content', ZoomLevelInfoWindow, '$markertitle', '$markericon');";
 }
 
@@ -266,7 +272,7 @@ $ScriptHeader = DDSanitize_output($ScriptHeader);
 
 ob_end_clean();
 
-$doc = JFactory::getDocument();
+$doc = Factory::getDocument();
 
 if (!$params->get('eu_privay_mode')){
 	$doc->addScriptDeclaration($ScriptHeader);

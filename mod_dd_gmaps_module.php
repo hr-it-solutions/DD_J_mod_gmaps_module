@@ -3,21 +3,26 @@
  * @package    DD_GMaps_Module
  *
  * @author     HR-IT-Solutions GmbH Florian Häusler <info@hr-it-solutions.com>
- * @copyright  Copyright (C) 2011 - 2019 HR-IT-Solutions GmbH
+ * @copyright  Copyright (C) 2011 - 2020 HR-IT-Solutions GmbH
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
 defined('_JEXEC') or die;
 
-JLoader::register('ModDD_GMaps_Module_Helper', __DIR__ . '/helper.php');
+use Joomla\CMS\Helper\ModuleHelper;
+use Joomla\Module\DD_GMaps_Module\Site\Helper\DD_GMaps_ModuleHelper;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Component\ComponentHelper;
 
-$app = JFactory::getApplication();
+$app = Factory::getApplication();
 
 // Multiload prevention todo J3.8
 if (false)
 {
 	$app->enqueueMessage(
-		JText::_('MOD_DD_GMAPS_MODULE_WARNUNG_MODUL_EXISTS_ALREADY'), 'warning'
+		Text::_('MOD_DD_GMAPS_MODULE_WARNUNG_MODUL_EXISTS_ALREADY'), 'warning'
 	);
 
 	return false;
@@ -27,19 +32,19 @@ if (false)
 if (!JPluginHelper::getPlugin('system', 'dd_gmaps_locations_geocode'))
 {
 	$app->enqueueMessage(
-		JText::_('MOD_DD_GMAPS_MODULE_WARNING_GEOCODE_PLUGIN_MUST_BE_ENABLED'), 'warning'
+		Text::_('MOD_DD_GMAPS_MODULE_WARNING_GEOCODE_PLUGIN_MUST_BE_ENABLED'), 'warning'
 	);
 }
 
 // API key (try loading default from component)
-if (ModDD_GMaps_Module_Helper::existsDDGMapsLocations())
+if (DD_GMaps_ModuleHelper::existsDDGMapsLocations())
 {
-	$API_Key = $params->get('google_api_key_js_places', JComponentHelper::getParams('com_dd_gmaps_locations')->get('google_api_key_js_places'));
+	$API_Key = $params->get('google_api_key_js_places', ComponentHelper::getParams('com_dd_gmaps_locations')->get('google_api_key_js_places'));
 
 	if (empty($API_Key))
 	{
 		$app->enqueueMessage(
-			JText::_('MOD_DD_GMAPS_MODULE_API_KEY_REQUIRED_COMPONENT'), 'warning'
+			Text::_('MOD_DD_GMAPS_MODULE_API_KEY_REQUIRED_COMPONENT'), 'warning'
 		);
 	}
 }
@@ -50,7 +55,7 @@ else
 	if (empty($API_Key))
 	{
 		$app->enqueueMessage(
-			JText::_('MOD_DD_GMAPS_MODULE_API_KEY_REQUIRED'), 'warning'
+			Text::_('MOD_DD_GMAPS_MODULE_API_KEY_REQUIRED'), 'warning'
 		);
 	}
 }
@@ -58,19 +63,19 @@ $Places_API = 'js?&libraries=places&v=3';
 
 $mapsScript = 'https://maps.google.com/maps/api/' . $Places_API . '&key=' . $API_Key;
 
-$doc = JFactory::getDocument();
+$doc = Factory::getDocument();
 
-if (!$params->get('eu_privay_mode') && !ModDD_GMaps_Module_Helper::isset_Script($doc->_scripts, $Places_API))
+if (!$params->get('eu_privay_mode') && !DD_GMaps_ModuleHelper::isset_Script($doc->_scripts, $Places_API))
 {
-	JHTML::_('script', $mapsScript, array('relative' => false));
+	HTMLHelper::_('script', $mapsScript, array('relative' => false));
 }
 
-JHTML::_('script', 'mod_dd_gmaps_module/markerclusterer_compiled.min.js', array('version' => 'auto', 'relative' => true));
-JHTML::_('script', 'mod_dd_gmaps_module/dd_gmaps_module.min.js', array('version' => 'auto', 'relative' => true));
+HTMLHelper::_('script', 'mod_dd_gmaps_module/markerclusterer_compiled.min.js', array('version' => 'auto', 'relative' => true));
+HTMLHelper::_('script', 'mod_dd_gmaps_module/dd_gmaps_module.min.js', array('version' => 'auto', 'relative' => true));
 
 require_once "modules/mod_dd_gmaps_module/inc/scriptheader.js.php";
 
 // Check for a custom CSS file
-JHtml::_('stylesheet', 'mod_dd_gmaps_module/user.css', array('version' => 'auto', 'relative' => true));
+HTMLHelper::_('stylesheet', 'mod_dd_gmaps_module/user.css', array('version' => 'auto', 'relative' => true));
 
-require_once JModuleHelper::getLayoutPath('mod_dd_gmaps_module', $params->get('layout', 'default'));
+require_once ModuleHelper::getLayoutPath('mod_dd_gmaps_module', $params->get('layout', 'default'));
