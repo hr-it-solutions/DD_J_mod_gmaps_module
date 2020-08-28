@@ -119,6 +119,7 @@
                       label="MOD_DD_GMAPS_MODULE_DEFAULT_ADDRESS_LABEL"
                       description="MOD_DD_GMAPS_MODULE_DEFAULT_ADDRESS_DESC"
                       addfieldpath="/modules/mod_dd_gmaps_module/fields"
+                      addfiield="Joomla\Module\DD_GMaps_Module\Site\Field"
             >
 
                 <field name="location_name"
@@ -235,6 +236,7 @@
                       label="MOD_DD_GMAPS_MODULE_API_SETTINGS_LABEL"
                       description="MOD_DD_GMAPS_MODULE_API_SETTINGS_DESC"
                       addfieldpath="/modules/mod_dd_gmaps_module/fields"
+                      addfiield="Joomla\Module\DD_GMaps_Module\Site\Field"
             >
 
                 <field name="google_api_key_js_places"
@@ -256,6 +258,7 @@
                       label="MOD_DD_GMAPS_MODULE_INFOWINDOW_SETTINGS_LABEL"
                       description="MOD_DD_GMAPS_MODULE_INFOWINDOW_SETTINGS_DESC"
                       addfieldpath="/modules/mod_dd_gmaps_module/fields"
+                      addfiield="Joomla\Module\DD_GMaps_Module\Site\Field"
             >
 
                 <field
@@ -304,6 +307,7 @@
                        label="MOD_DD_GMAPS_MODULE_ADDONFEATURES_LABEL"
                        description="MOD_DD_GMAPS_MODULE_ADDONFEATURES_DESC"
                        addfieldpath="/modules/mod_dd_gmaps_module/fields"
+                       addfiield="Joomla\Module\DD_GMaps_Module\Site\Field"
             >
 
                 <field type="spacer" name="addonfeatures" label="MOD_DD_GMAPS_MODULE_ADDON_DDGMAPS_LOCATIONS" />
